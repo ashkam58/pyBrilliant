@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 16px;
+}
+
+html, body {
+  @apply bg-gradient-to-b from-indigo-50 to-pink-50 min-h-screen text-slate-800;
+}
+.card {
+  @apply rounded-2xl bg-white/80 backdrop-blur p-6 shadow-soft border border-black/5;
+}
+.badge {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-indigo-100 text-indigo-800;
+}
+.link {
+  @apply hover:underline text-indigo-700;
+}
+code {
+  @apply rounded-md bg-slate-900/95 text-slate-100 px-2 py-1;
+}
+pre code { @apply bg-transparent p-0; }
+.mdx h2 { @apply text-2xl font-extrabold mt-6 mb-2; }
+.mdx h3 { @apply text-xl font-bold mt-4 mb-1; }
+.mdx p { @apply leading-relaxed my-3; }
+.mdx ul { @apply list-disc pl-6 my-3; }
+.mdx ol { @apply list-decimal pl-6 my-3; }
+.mdx blockquote { @apply border-l-4 border-pink-400 pl-4 italic bg-pink-50 rounded-r-xl; }

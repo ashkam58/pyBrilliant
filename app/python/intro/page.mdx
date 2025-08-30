@@ -1,0 +1,310 @@
+export const metadata = {
+  title: "Python 101 — A Playful Intro",
+  description: "Start coding Python with Gen‑Z energy: setup, basics, drills, mini‑project, and vocab drops for sharper English."
+}
+
+# Python 101 — A Playful Intro 🐍✨
+
+
+## What you’ll learn (TL;DR)
+- Run Python from terminal like a boss.
+- Variables, data types, and printing (aka “talking to the console”).
+- Branching with `if` and looping with `for` / `while`.
+- Lists & dictionaries (and a peek at *references* a.k.a. “pointers”).
+- A tiny project: **Guess‑the‑Number**.
+- 5 rapid‑fire drills to make it stick.
+
+---
+
+<VariableGuess />
+
+> 💡 **Phrase drop — “rule of thumb”**: a practical general guideline (not exact law). You’ll see these sprinkled in.
+
+---
+
+## Setup (2 mins)
+- Check Python: `python --version` or `python3 --version`
+- Open VS Code (or your fave editor). Create a folder like `python‑kids/`.
+- Make a file `hello.py` inside it.
+
+```python
+print("Hello, Python world! ✨")
+```
+
+Run it:
+- Windows: `py hello.py` (or `python hello.py`)
+- macOS/Linux: `python3 hello.py`
+
+> 💡 **“Where the rubber meets the road”** = where theory becomes action. That moment is now.
+
+---
+
+## 0. Python is a conversation
+Python reads top‑to‑bottom. You write instructions; Python obeys (politely). Whitespace matters, punctuation matters, and your curiosity matters the most.
+
+---
+
+## 1. Variables & Types
+Variables are **labels** pointing to **values**.
+
+```python
+name = "Aarav"        # str (string)
+age = 12              # int (integer)
+height = 1.49         # float
+is_coder = True       # bool
+
+print(name, age, height, is_coder)
+```
+
+> 📝 **Word** — **“concise”**: brief but complete. Your code should be concise.
+
+**Mini‑drill**: Change `age` and `height`, print a sentence: `Aarav is 13 and 1.51m tall.`
+
+---
+
+## 2. Input + Output
+
+```python
+name = input("Your name? ")
+print("Welcome,", name)
+```
+
+> ⚠️ `input()` always returns a **string**. Convert when needed:
+
+```python
+num = int(input("Enter a number: "))
+print(num * 10)
+```
+
+---
+
+## 3. If / Elif / Else
+
+```python
+score = int(input("Score (0–100): "))
+if score >= 90:
+    print("A — Ace!")
+elif score >= 75:
+    print("B — Breezy.")
+else:
+    print("Keep grinding ✊")
+```
+
+> 💬 **Phrase** — **“edge case”**: a weird corner scenario your code must still handle (like score = 101 😅).
+
+---
+
+## 4. Loops (For & While)
+
+```python
+# For: known counts
+for i in range(1, 6):
+    print("Beat", i)
+
+# While: repeat until a condition changes
+countdown = 5
+while countdown > 0:
+    print(countdown)
+    countdown -= 1
+print("Lift‑off 🚀")
+```
+
+---
+
+## 5. Functions (Your Reusable Spells)
+
+```python
+def area_rect(w, h):
+    return w * h
+
+print(area_rect(5, 3))
+```
+
+> 💡 **“By and large”** = generally speaking. By and large, functions keep code clean.
+
+---
+
+## 6. Collections — Lists & Dicts
+
+```python
+nums = [10, 20, 30]
+nums.append(40)
+print(nums)  # [10, 20, 30, 40]
+
+student = {"name": "Aarushi", "grade": 4}
+student["likes"] = ["math", "drawing"]
+print(student)
+```
+
+**List iteration**
+```python
+for x in nums:
+    print(x)
+```
+
+**Dictionary iteration**
+```python
+for key, value in student.items():
+    print(key, "→", value)
+```
+
+---
+
+## 7. References (Pointers) — Quick Peek
+In Python, variables hold **references** to objects. Two names can point to the **same list**.
+
+```python
+a = [1, 2]
+b = a         # b references the same list as a
+b.append(3)
+print(a)  # [1, 2, 3]
+print(b)  # [1, 2, 3]
+
+b = [9]       # now b points to a NEW list
+print(a)  # [1, 2, 3]
+print(b)  # [9]
+```
+
+> 🧠 **Rule of thumb**: mutating a shared object (like a list) changes it for **all** references.
+
+Make a **copy** if you want independence:
+
+```python
+original = [1, 2, 3]
+clone = original[:]      # or list(original) or original.copy()
+clone.append(999)
+print(original)  # [1, 2, 3]
+print(clone)     # [1, 2, 3, 999]
+```
+
+---
+
+## 8. Five Rapid Drills (2–3 mins)
+1) **Sum 1..N**: read `n` and print sum `1+2+...+n`.
+2) **FizzBuzz lite**: for 1..20 print `Fizz` if multiple of 3, `Buzz` if 5, `FizzBuzz` if 15, else the number.
+3) **Max of three**: read 3 ints, print the largest (no `max()`—use `if`).
+4) **Count vowels**: read a word, count `aeiou`.
+5) **List squares**: given `n`, build a list `[1,4,9,...,n^2]`.
+
+<details>
+<summary>💡 Hints</summary>
+
+- Use `range(1, n+1)` for inclusive counting.
+- For vowels: `if ch.lower() in "aeiou": ...`
+- Build lists with `.append()`.
+
+</details>
+
+---
+
+## 9. Pattern Printing (taste test)
+
+```python
+# right triangle
+rows = int(input("Rows: "))
+for r in range(1, rows+1):
+    print("*" * r)
+```
+
+Try: centered pyramid, inverted pyramid, and a hollow square.
+
+<details>
+<summary>✨ Thinking pattern</summary>
+Break the shape into **rows** and **columns**. For each row, decide:
+- How many spaces?
+- How many symbols?
+- Border vs inside?
+</details>
+
+---
+
+## 10. Mini‑Project — Guess the Number 🎯
+
+```python
+import random
+
+secret = random.randint(1, 50)
+tries = 0
+
+print("I picked a number from 1..50. Can you guess it?")
+
+while True:
+    g = int(input("Your guess: "))
+    tries += 1
+
+    if g < secret:
+        print("Too low 🥶")
+    elif g > secret:
+        print("Too high 🔥")
+    else:
+        print(f"Bang on! You did it in {tries} tries.")
+        break
+```
+
+**Upgrades**: Add a max tries limit, difficulty levels, or hints like “within 5”.
+
+---
+
+## 11. Debug Habits (chef’s kiss)
+- Read the error **from the bottom up**.
+- `print()` values to see what’s happening.
+- Shrink the problem: comment things out, isolate a tiny failing piece.
+- Name things clearly: `total_sum` > `ts`.
+
+> ✨ **Phrase** — **“TL;DR”**: *Too long; didn’t read*. Put a short summary at the top of big files.
+
+---
+
+## 12. Exit Ticket (quick check)
+- I can run a `.py` file ✅
+- I know `if/elif/else` ✅
+- I can loop with `for` and `while` ✅
+- I can explain why `a=b` (lists) shares the same object ✅
+
+<details>
+<summary>🧩 Quiz (3 Qs)</summary>
+
+**1)** What type does `input()` return?
+- A) `str`  
+- B) `int`  
+- C) `bool`
+
+**2)** Fill the blank to copy a list: `copy = items[___]`
+
+**3)** What prints?  
+```python
+a = [1,2]
+b = a
+b += [3]
+print(a)
+```
+
+**Answers:** 1‑A, 2‑`[:]`, 3‑`[1,2,3]`
+
+</details>
+
+---
+
+## 13. English Box — Level Up Your Teacher Voice
+- **“Rule of thumb”** — practical guideline.  
+- **“Edge case”** — unusual scenario you still must handle.  
+- **“Where the rubber meets the road”** — where theory becomes action.  
+- **“By and large”** — generally speaking.  
+- **“Concise”** — brief yet complete.
+
+Use these in class; kids catch phrases like Pokémon.
+
+---
+
+## What’s next?
+- Build a **Pattern Playground** page.
+- Add lessons: Strings, Slicing, `for ... else`, List Comprehensions, Errors & Exceptions.
+- Save today’s code in Git with meaningful commit messages ("feat: add guess game").
+
+> 🍀 **Final nudge**: Code a little **every day**. Momentum beats motivation.
+
+---
+
+<footer>
+<small>© Ashkam Intelligence Studios — PythonKids. You got this. 🫶</small>
+</footer>

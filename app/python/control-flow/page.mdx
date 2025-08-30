@@ -1,0 +1,351 @@
+# Control Flow Magic 🎯
+
+<Callout type="tip">
+**🎪 Welcome to the Control Flow Circus!** Get ready to make your programs think, decide, and choose their path like a smart robot! 🤖✨
+</Callout>
+
+## What you'll learn (TL;DR) 📋
+
+• **Decision Making** with `if`, `elif`, and `else` - Teaching your code to think! 🧠  
+• **Pattern Matching** with `match` - The cool new way to handle multiple choices! 🎯  
+• **Break & Continue** - Control your loops like a pro! 🛑▶️  
+• **Pass Statement** - The polite way to say "do nothing for now" 😴  
+
+---
+
+## 🎭 Making Decisions with if Statements
+
+Just like you decide what to wear based on the weather, Python can make decisions using **if statements**!
+
+<CodeRunner starter={`# Let's help a robot decide what to do!
+weather = "sunny"
+
+if weather == "sunny":
+    print("🌞 Let's go to the park!")
+elif weather == "rainy":
+    print("☔ Time for indoor games!")
+elif weather == "snowy":
+    print("⛄ Perfect for a snowman!")
+else:
+    print("🤔 Hmm, not sure about this weather...")
+
+# Try changing 'weather' to "rainy" or "snowy"!`} />
+
+<Callout type="note">
+**🔍 Code Detective:** Notice how Python checks each condition **one by one**. Once it finds a match, it skips the rest! It's like choosing the first door that opens. 🚪
+</Callout>
+
+### 🎮 Interactive Challenge: Age Classifier
+
+Let's build a fun age classifier that gives different messages based on age!
+
+<CodeRunner starter={`# Age Classifier Challenge 🎂
+age = 15
+
+if age < 3:
+    print("👶 Baby steps!")
+    category = "Baby"
+elif age < 13:
+    print("🧒 Kid power!")
+    category = "Kid"
+elif age < 20:
+    print("🌟 Teen energy!")
+    category = "Teen"
+elif age < 65:
+    print("💪 Adult mode!")
+    category = "Adult"
+else:
+    print("🌸 Wisdom mode!")
+    category = "Senior"
+
+print(f"Category: {category}")
+
+# Try different ages: 2, 8, 16, 30, 70`} />
+
+<FlowVisualizer />
+
+<VariableGuess />
+
+---
+
+## 🎯 Pattern Matching with match Statements
+
+Python 3.10 introduced **match statements** - think of it as a super-powered `if-elif` that can do pattern matching magic! ✨
+
+<CodeRunner starter={`# HTTP Status Code Helper 🌐
+def explain_status(status):
+    match status:
+        case 200:
+            return "✅ Success! Everything is awesome!"
+        case 404:
+            return "🔍 Not Found - Page is playing hide and seek!"
+        case 418:
+            return "🫖 I'm a teapot - Yes, this is real!"
+        case 500:
+            return "💥 Server Error - Something went boom!"
+        case status if status >= 400:
+            return f"❌ Client/Server Error ({status})"
+        case _:
+            return f"📡 Status {status} - Unknown territory!"
+
+# Test different status codes
+for code in [200, 404, 418, 500, 403, 999]:
+    print(f"{code}: {explain_status(code)}")
+`} />
+
+### 🎪 Advanced Pattern Matching: Point Classifier
+
+<MatchPatternDemo />
+
+<CodeRunner starter={`# Point Classifier with Pattern Matching 📍
+def classify_point(point):
+    match point:
+        case (0, 0):
+            return "🎯 Origin - The center of the universe!"
+        case (0, y):
+            return f"📏 On Y-axis at height {y}"
+        case (x, 0):
+            return f"📏 On X-axis at position {x}"
+        case (x, y) if x == y:
+            return f"↗️ On diagonal at ({x}, {y})"
+        case (x, y) if x > 0 and y > 0:
+            return f"📍 Quadrant I: ({x}, {y})"
+        case (x, y):
+            return f"📍 Point at ({x}, {y})"
+        case _:
+            return "🤷 Not a valid point!"
+
+# Test various points
+points = [(0, 0), (0, 5), (3, 0), (4, 4), (2, 3), (-1, 2)]
+for point in points:
+    print(f"{point} → {classify_point(point)}")
+`} />
+
+---
+
+## 🔄 Loop Control: break and continue
+
+Sometimes you need to control your loops like a DJ controls music - skip songs or stop the party! 🎵
+
+### 🛑 The break Statement
+
+<CodeRunner starter={`# Treasure Hunt Game! 💎
+import random
+
+print("🗺️  Welcome to Treasure Hunt!")
+print("Find the treasure in 10 tries or less!\n")
+
+for attempt in range(1, 11):
+    guess = random.randint(1, 10)  # Simulating player guess
+    treasure_location = 7  # Secret treasure location
+    
+    print(f"🔍 Attempt {attempt}: Searching at location {guess}")
+    
+    if guess == treasure_location:
+        print(f"🏆 TREASURE FOUND! You found it in {attempt} attempts!")
+        print("💰 You're rich! 💎✨")
+        break  # Exit the loop immediately!
+    else:
+        print("❌ No treasure here... keep looking!")
+        
+else:
+    # This runs only if the loop completes without break
+    print("😔 Oh no! You ran out of attempts!")
+    print(f"💡 The treasure was at location {treasure_location}!")
+`} />
+
+### ▶️ The continue Statement
+
+<CodeRunner starter={`# Even Number Party! 🎉
+print("🎈 Welcome to the Even Number Party!")
+print("Only even numbers are invited!\n")
+
+for number in range(1, 11):
+    if number % 2 != 0:  # If number is odd
+        print(f"🚫 {number} is odd - not invited!")
+        continue  # Skip the rest and go to next iteration
+    
+    # This only runs for even numbers
+    print(f"🎉 {number} is even - Welcome to the party!")
+    print(f"   🍰 Here's your cake slice #{number//2}!")
+
+print("\n🎊 Party complete! All even numbers celebrated!")
+`} />
+
+---
+
+## 😴 The pass Statement
+
+Sometimes you need a placeholder - like saying "I'll do this later!" The `pass` statement is perfect for this!
+
+<CodeRunner starter={`# Building a Game Framework 🎮
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.health = 100
+        self.score = 0
+    
+    def attack(self):
+        pass  # TODO: Implement attack logic later
+    
+    def defend(self):
+        pass  # TODO: Implement defense logic later
+    
+    def show_stats(self):
+        print(f"👤 Player: {self.name}")
+        print(f"❤️  Health: {self.health}")
+        print(f"⭐ Score: {self.score}")
+
+# For now, we can create players and show stats
+player1 = Player("Hero")
+player1.show_stats()
+
+# The attack and defend methods exist but do nothing yet
+player1.attack()  # Runs without error, does nothing
+player1.defend()  # Runs without error, does nothing
+
+print("🚧 Game framework ready for development!")
+`} />
+
+---
+
+## 🎯 Real-World Challenge: Smart Calculator
+
+Let's build a smart calculator that uses all our control flow knowledge!
+
+<CodeRunner starter={`# Smart Calculator 🧮✨
+def smart_calculator():
+    print("🧮 Welcome to the Smart Calculator!")
+    print("Available operations: +, -, *, /, %, **")
+    print("Type 'quit' to exit\n")
+    
+    while True:
+        try:
+            # Get user input (simulated)
+            operations = [
+                ("10 + 5", 10, "+", 5),
+                ("12 / 0", 12, "/", 0),  # Division by zero test
+                ("2 ** 8", 2, "**", 8),
+                ("quit", None, None, None)
+            ]
+            
+            for display, a, op, b in operations:
+                print(f"💭 Input: {display}")
+                
+                if display == "quit":
+                    print("👋 Thanks for using Smart Calculator!")
+                    return
+                
+                # Handle division by zero
+                if op == "/" and b == 0:
+                    print("⚠️  Error: Cannot divide by zero!")
+                    continue
+                
+                # Perform calculation using match
+                match op:
+                    case "+":
+                        result = a + b
+                        emoji = "➕"
+                    case "-":
+                        result = a - b
+                        emoji = "➖"
+                    case "*":
+                        result = a * b
+                        emoji = "✖️"
+                    case "/":
+                        result = a / b
+                        emoji = "➗"
+                    case "%":
+                        result = a % b
+                        emoji = "🔢"
+                    case "**":
+                        result = a ** b
+                        emoji = "⚡"
+                    case _:
+                        print("❌ Unknown operation!")
+                        continue
+                
+                print(f"✅ {a} {emoji} {b} = {result}")
+                
+                # Fun comments based on result
+                if result == 0:
+                    print("🕳️  Zero - the ultimate neutral!")
+                elif result < 0:
+                    print("📉 Negative vibes!")
+                elif result > 1000:
+                    print("🚀 That's a big number!")
+                elif result == int(result):
+                    print("🎯 Perfect whole number!")
+                
+                print()  # Empty line for readability
+        
+        except Exception as e:
+            print(f"💥 Oops! Something went wrong: {e}")
+            continue
+
+# Run the calculator
+smart_calculator()
+`} />
+
+---
+
+## 🎪 Quiz Time: Test Your Control Flow Skills!
+
+<Quiz items={[
+  {
+    "q": "What happens when you use 'break' in a loop?",
+    "options": [
+      "It skips the current iteration",
+      "It exits the loop completely", 
+      "It pauses the loop for 1 second",
+      "It restarts the loop from the beginning"
+    ],
+    "answer": 1,
+    "explain": "🛑 'break' exits the loop completely! It's like an emergency exit door."
+  },
+  {
+    "q": "What does the 'pass' statement do?",
+    "options": [
+      "It throws an error",
+      "It does absolutely nothing",
+      "It skips to the next line",
+      "It returns None"
+    ],
+    "answer": 1,
+    "explain": "😴 'pass' is a placeholder that does nothing! Perfect for 'TODO' sections."
+  },
+  {
+    "q": "In a match statement, what does the '_' case represent?",
+    "options": [
+      "A variable named underscore",
+      "An error case",
+      "A wildcard that matches anything",
+      "A private case"
+    ],
+    "answer": 2,
+    "explain": "🎯 The '_' is a wildcard that catches everything else! It's like a safety net."
+  }
+]} />
+
+---
+
+## 🎊 Congratulations!
+
+You've mastered Python's control flow tools! 🏆 You can now:
+
+- ✅ Make your programs think with `if-elif-else`
+- ✅ Use modern pattern matching with `match`
+- ✅ Control loops with `break` and `continue`
+- ✅ Create placeholders with `pass`
+
+<Callout type="tip">
+**🚀 Pro Tip:** Control flow is like directing traffic in your code - use it wisely to create smooth, logical programs! Practice with real-world scenarios to become a control flow master! 
+</Callout>
+
+### 🔗 What's Next?
+
+Ready for the next adventure? Check out **Loop-de-Loop** to master Python's powerful iteration tools! 🔄
+
+---
+
+*💡 Remember: Great programmers don't just write code that works - they write code that makes decisions intelligently!* ✨

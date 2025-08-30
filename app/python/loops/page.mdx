@@ -1,0 +1,26 @@
+export const metadata = {
+  title: 'Loop-de-Loop 🔁 — Loops',
+  description: 'for, while, and range.'
+}
+
+# Loop‑de‑Loop 🔁
+
+Loops help you repeat actions without copy‑pasting.
+
+## `for` with `range`
+
+```python
+for i in range(5):  # 0..4
+    print(i)
+```
+
+Try a custom loop:
+
+<CodeRunner starter={`total = 0\nfor i in range(1, 6):\n    total += i\nprint('sum:', total)`} />
+
+## Quick quiz
+
+<Quiz items={[
+  { q: 'range(3) produces?', options: ['1,2,3', '0,1,2', '0,1,2,3'], answer: 1, explain: 'range(3) yields 0,1,2.' },
+  { q: 'A while loop repeats until…', options: ['you press stop', 'the condition is False', 'memory ends'], answer: 1 }
+]} />
