@@ -3,9 +3,28 @@ import { useState } from 'react'
 
 type Q = { q: string, options: string[], answer: number, explain?: string }
 
-export default function Quiz({ items }:{ items: Q[] }) {
-  const [picked, setPicked] = useState<(number | null)[]>(Array(items.length).fill(null))
+interface QuizProps {
+  items?: Q[]
+  question?: string
+  options?: string[]
+  correct?: number
+  explanation?: string
+}
+
+export default function Quiz({ items, question, options, correct, explanation }: QuizProps) {
+  // Handle both formats: array of items OR individual props
+  const quizItems = items || (question && options && correct !== undefined ? [
+    { q: question, options, answer: correct, explain: explanation }
+  ] : [])
+
+  const [picked, setPicked] = useState<(number | null)[]>(Array(quizItems.length).fill(null))
   const [show, setShow] = useState(false)
+
+  if (quizItems.length === 0) {
+    return <div className="card bg-red-100 border-red-300">
+      <p className="text-red-600">Quiz error: No questions provided</p>
+    </div>
+  }
 
   return (
     <div className="card">
@@ -14,7 +33,7 @@ export default function Quiz({ items }:{ items: Q[] }) {
         <button onClick={() => setShow(true)} className="px-3 py-1 rounded-full bg-indigo-600 text-white text-sm font-bold">Check</button>
       </div>
       <ol className="space-y-4 mt-4">
-        {items.map((it, i) => (
+        {quizItems.map((it, i) => (
           <li key={i} className="space-y-2">
             <p className="font-semibold">{i+1}. {it.q}</p>
             <div className="grid gap-2">
