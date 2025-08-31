@@ -76,7 +76,7 @@ export default function CodeRunner({ starter='' }:{ starter?: string }) {
         spellCheck={false}
         className="w-full h-48 font-mono text-sm p-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-pink-400"
       />
-      <pre className="bg-black text-white rounded-xl p-3 overflow-auto"><code>{out}</code></pre>
+      <pre className="bg-black text-white rounded-xl p-4 overflow-auto min-h-32 max-h-64"><code className="whitespace-pre-wrap">{out}</code></pre>
     </div>
   )
 }
