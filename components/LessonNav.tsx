@@ -6,7 +6,7 @@ import { PYTHON_COURSE } from '@/lib/course'
 export default function LessonNav() {
   const pathname = usePathname()
   return (
-    <nav className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/50 p-6 sticky top-24">
+    <nav className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/50 p-6 sticky top-24 overflow-y-auto max-h-screen">
       <div className="flex items-center space-x-2 mb-6">
         <div className="text-2xl">🐍</div>
         <div>

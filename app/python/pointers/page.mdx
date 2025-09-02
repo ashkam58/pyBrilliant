@@ -1,0 +1,108 @@
+import CartoonCard from "@/components/dsa/CartoonCard";
+
+
+## Understanding Pointers
+
+
+Pointers are a fundamental concept in programming that help us understand how variables reference memory locations. Let's explore how pointers behave with different data types.
+
+
+### Immutable Data Types: Integers
+
+
+```python
+num1 = 11
+num2 = num1
+
+
+# Both variables point to the same integer object
+print(id(num1), id(num2))
+
+
+num2 = 22
+# num2 now points to a new integer object
+print(id(num1), id(num2))
+```
+
+
+Integers are **immutable**, meaning their value cannot be changed once created. Assigning a new value creates a new object in memory.
+
+
+<PointerPlayground 
+  labels={{ num1: "Number 1", num2: "Number 2" }} 
+  env={{ num1: 1, num2: 2 }} 
+  heap={[
+    { id: 1, kind: "int", value: 11, refs: [] },
+    { id: 2, kind: "int", value: 22, refs: [] }
+  ]}
+/>
+
+
+### Mutable Data Types: Dictionaries
+
+
+```python
+d1 = {"key": 11}
+d2 = d1
+
+
+# Both variables point to the same dictionary object
+d2["key"] = 22
+print(d1, d2)
+```
+
+
+Dictionaries are **mutable**, meaning their contents can be changed. Both variables continue to reference the same object in memory.
+
+
+<PointerPlayground 
+  labels={{ d1: "Dictionary 1", d2: "Dictionary 2" }} 
+  env={{ d1: 1, d2: 1 }} 
+  heap={[
+    { id: 1, kind: "dict", value: { key: 22 }, refs: [] }
+  ]}
+/>
+
+
+### Garbage Collection
+
+
+When no variables reference an object, Python automatically removes it from memory through a process called **garbage collection**.
+
+
+```python
+d1 = {"key": 11}
+d2 = d1
+d2 = {"key": 22}
+# The original dictionary is now eligible for garbage collection
+```
+
+
+> Python cleans up objects that are no longer referenced, freeing up memory.
+
+
+### Mini‑quiz
+
+
+<QuizMCQ
+question="After num1=11; num2=num1; num2=22; what is num1?"
+choices={["11", "22", "Error", "Undefined"]}
+answer="11"
+explanation="num1 remains unchanged; num2 now points to a new integer object."
+/>
+
+
+<QuizMCQ
+question="After d1={key:11}; d2=d1; d2['key']=22; what is d1['key']?"
+choices={["11", "22", "Error", "Undefined"]}
+answer="22"
+explanation="Both variables still point to the same dictionary, which was edited in place."
+/>
+
+
+<QuizMCQ
+question="What happens to an object when no variables reference it?"
+choices={["It remains in memory", "It is garbage collected", "It causes an error", "It becomes undefined"]}
+answer="It is garbage collected"
+explanation="Python automatically removes unreferenced objects to free memory."
+/>
