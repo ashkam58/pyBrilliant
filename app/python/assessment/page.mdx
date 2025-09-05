@@ -1,0 +1,386 @@
+import LoopDrill from "@/components/LoopDrill";
+import ProgressTracker from "@/components/ProgressTracker";
+import CartoonCard from "@/components/dsa/CartoonCard";
+
+## 🎯 Final Assessment
+
+Test your mastery of Python fundamentals! Complete all sections to unlock your certificate.
+
+<ProgressTracker totalMCQs={16} totalDrills={5} />
+
+## Code Drills
+
+Apply your programming skills to solve real challenges:
+
+### Drill 1: Loop Mastery
+
+<LoopDrill />
+
+### Drill 2: Binary Search Implementation
+
+<details className="border rounded-lg p-4 mb-4">
+<summary className="font-medium cursor-pointer">🔍 Binary Search Challenge</summary>
+
+**Problem**: Implement binary search to find a target value in a sorted list.
+
+```python
+def binary_search(arr, target):
+    # Your implementation here
+    left = 0
+    right = len(arr) - 1
+    
+    while ??? <= ???:
+        mid = ???
+        if arr[mid] == ???:
+            return ???
+        elif arr[mid] < ???:
+            ??? = mid + 1
+        else:
+            ??? = mid - 1
+    
+    return ???  # Not found
+```
+
+**Test cases**:
+- `binary_search([1, 3, 5, 7, 9], 5)` should return `2`
+- `binary_search([1, 3, 5, 7, 9], 6)` should return `-1`
+
+<details className="mt-3 bg-green-50 border border-green-200 rounded p-3">
+<summary className="text-green-800 font-medium cursor-pointer">Solution</summary>
+
+```python
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1  # Not found
+```
+
+**Time Complexity**: O(log n) - halves search space each iteration
+</details>
+</details>
+
+### Drill 3: List Insert at Head
+
+<details className="border rounded-lg p-4 mb-4">
+<summary className="font-medium cursor-pointer">📝 Insert Head Challenge</summary>
+
+**Problem**: Implement an efficient `insert_head` function and analyze its complexity.
+
+```python
+def insert_head(arr, value):
+    """Insert value at the beginning of array"""
+    # Method 1: Using insert() - what's the complexity?
+    arr.insert(0, value)
+    return arr
+
+def insert_head_manual(arr, value):
+    """Manual implementation showing the work"""
+    # Your implementation here
+    new_arr = [???] + ???
+    return new_arr
+```
+
+**Questions**:
+1. What's the time complexity of `arr.insert(0, value)`?
+2. Why is inserting at the head expensive?
+3. How could you make this more efficient?
+
+<details className="mt-3 bg-green-50 border border-green-200 rounded p-3">
+<summary className="text-green-800 font-medium cursor-pointer">Solution & Analysis</summary>
+
+```python
+def insert_head_manual(arr, value):
+    new_arr = [value] + arr
+    return new_arr
+
+# Alternative showing the shifting work:
+def insert_head_with_shifting(arr, value):
+    result = [None] * (len(arr) + 1)
+    result[0] = value
+    for i in range(len(arr)):
+        result[i + 1] = arr[i]  # Shift each element
+    return result
+```
+
+**Analysis**:
+1. **Time Complexity**: O(n) - must shift all n elements
+2. **Why expensive**: All existing elements move one position right
+3. **Better approach**: Use `collections.deque` for O(1) head insertion
+</details>
+</details>
+
+### Drill 4: Deep Copy Bug Hunt
+
+<details className="border rounded-lg p-4 mb-4">
+<summary className="font-medium cursor-pointer">🐛 Debug the Copy Issue</summary>
+
+**Problem**: This code has a subtle bug. Find and fix it!
+
+```python
+def process_user_data(users):
+    # Process a list of user dictionaries
+    backup = users.copy()  # Make a backup... or did we?
+    
+    for user in users:
+        user['processed'] = True
+        user['timestamp'] = '2024-01-01'
+    
+    print("Original backup:", backup)
+    print("Modified users:", users)
+    
+    # Expected: backup should be unchanged
+    # Actual: backup is also modified! Why?
+```
+
+**Test it**:
+```python
+users = [
+    {'name': 'Alice', 'age': 25},
+    {'name': 'Bob', 'age': 30}
+]
+process_user_data(users)
+```
+
+<details className="mt-3 bg-green-50 border border-green-200 rounded p-3">
+<summary className="text-green-800 font-medium cursor-pointer">Solution & Explanation</summary>
+
+**The Bug**: `users.copy()` creates a shallow copy - it copies the list, but not the dictionaries inside it!
+
+**Fixed Version**:
+```python
+import copy
+
+def process_user_data(users):
+    backup = copy.deepcopy(users)  # Deep copy needed!
+    
+    for user in users:
+        user['processed'] = True
+        user['timestamp'] = '2024-01-01'
+    
+    print("Original backup:", backup)
+    print("Modified users:", users)
+```
+
+**Key Learning**: 
+- **Shallow copy**: `list.copy()` - copies container, shares contents
+- **Deep copy**: `copy.deepcopy()` - copies everything recursively
+</details>
+</details>
+
+### Drill 5: Complexity Analysis
+
+<details className="border rounded-lg p-4 mb-4">
+<summary className="font-medium cursor-pointer">📊 O(a+b) vs O(a×b) Challenge</summary>
+
+**Problem**: Analyze these two functions and determine their complexity:
+
+```python
+def process_separately(list_a, list_b):
+    """Process lists independently"""
+    result = []
+    
+    # Process list A
+    for item in list_a:
+        result.append(item * 2)
+    
+    # Process list B  
+    for item in list_b:
+        result.append(item * 3)
+    
+    return result
+
+def process_combinations(list_a, list_b):
+    """Process all combinations"""
+    result = []
+    
+    for item_a in list_a:
+        for item_b in list_b:
+            result.append(item_a + item_b)
+    
+    return result
+```
+
+**Questions**:
+1. What's the complexity of `process_separately`?
+2. What's the complexity of `process_combinations`?
+3. If `len(list_a) = 100` and `len(list_b) = 50`, how many operations does each perform?
+
+<details className="mt-3 bg-green-50 border border-green-200 rounded p-3">
+<summary className="text-green-800 font-medium cursor-pointer">Analysis</summary>
+
+**Analysis**:
+
+1. **`process_separately`**: O(a + b)
+   - First loop: a iterations
+   - Second loop: b iterations  
+   - Total: a + b operations
+
+2. **`process_combinations`**: O(a × b)
+   - Outer loop: a iterations
+   - Inner loop: b iterations for each outer
+   - Total: a × b operations
+
+**With a=100, b=50**:
+- `process_separately`: 100 + 50 = 150 operations
+- `process_combinations`: 100 × 50 = 5,000 operations
+- **33x more work!**
+
+**Key Insight**: Nested loops over different inputs multiply their complexities.
+</details>
+</details>
+
+---
+
+## 📋 Knowledge Check: Multiple Choice Questions
+
+Test your understanding with these comprehensive questions:
+
+<QuizMCQ
+question="What happens when you assign a new value to an immutable variable?"
+choices={["The original object is modified", "A new object is created", "An error occurs", "The variable becomes mutable"]}
+answer="A new object is created"
+explanation="Immutable objects cannot be changed, so assignment creates a new object and updates the reference."
+/>
+
+<QuizMCQ
+question="Which operation is O(1) for Python lists?"
+choices={["Insert at beginning", "Search for value", "Access by index", "Remove from middle"]}
+answer="Access by index"
+explanation="List indexing uses direct memory access, making it constant time O(1)."
+/>
+
+<QuizMCQ
+question="Binary search requires the input to be:"
+choices={["Mutable", "Sorted", "Numeric", "Small"]}
+answer="Sorted"
+explanation="Binary search works by repeatedly dividing the search space, which only works on sorted data."
+/>
+
+<QuizMCQ
+question="The time complexity of inserting at the head of a list is:"
+choices={["O(1)", "O(log n)", "O(n)", "O(n²)"]}
+answer="O(n)"
+explanation="Inserting at the head requires shifting all existing elements one position to the right."
+/>
+
+<QuizMCQ
+question="What's the difference between shallow and deep copy?"
+choices={["Shallow is faster", "Deep copies nested objects", "Shallow uses more memory", "No difference"]}
+answer="Deep copies nested objects"
+explanation="Shallow copy shares nested objects, while deep copy recursively copies everything."
+/>
+
+<QuizMCQ
+question="For algorithms with two inputs of size a and b, O(a + b) means:"
+choices={["Process inputs together", "Process inputs separately", "Always faster than O(a × b)", "Same as O(max(a,b))"]}
+answer="Process inputs separately"
+explanation="O(a + b) indicates sequential processing: do a work, then b work."
+/>
+
+<QuizMCQ
+question="Which sorting algorithm has O(n log n) average case complexity?"
+choices={["Bubble sort", "Selection sort", "Merge sort", "Insertion sort"]}
+answer="Merge sort"
+explanation="Merge sort consistently performs O(n log n) operations through divide-and-conquer."
+/>
+
+<QuizMCQ
+question="The expression '3n² + 5n + 2' simplifies to which Big-O class?"
+choices={["O(3n²)", "O(n²)", "O(5n)", "O(2)"]}
+answer="O(n²)"
+explanation="Drop constants and lower-order terms; the n² term dominates for large inputs."
+/>
+
+<QuizMCQ
+question="Which loop pattern creates O(n²) complexity?"
+choices={["Single loop over n items", "Two separate loops", "Nested loops over same data", "Loop with early break"]}
+answer="Nested loops over same data"
+explanation="Nested loops multiply complexities: O(n) × O(n) = O(n²)."
+/>
+
+<QuizMCQ
+question="What's the key advantage of Big-O notation?"
+choices={["Gives exact runtime", "Counts operations precisely", "Shows growth patterns", "Measures memory usage"]}
+answer="Shows growth patterns"
+explanation="Big-O focuses on how algorithms scale with input size, not exact measurements."
+/>
+
+<QuizMCQ
+question="In Python, which creates a reference to the same object?"
+choices={["deep copy", "shallow copy", "assignment", "list comprehension"]}
+answer="assignment"
+explanation="Assignment (x = y) makes both variables point to the same object in memory."
+/>
+
+<QuizMCQ
+question="The worst-case complexity of linear search is:"
+choices={["O(1)", "O(log n)", "O(n)", "O(n²)"]}
+answer="O(n)"
+explanation="Linear search may need to check every element if the target is last or absent."
+/>
+
+<QuizMCQ
+question="Which data structure allows O(1) insertion at both ends?"
+choices={["List", "Dictionary", "Deque", "Set"]}
+answer="Deque"
+explanation="Collections.deque (double-ended queue) supports O(1) operations at both ends."
+/>
+
+<QuizMCQ
+question="Mutable default arguments in functions are dangerous because:"
+choices={["They use more memory", "They're slower", "They're shared across calls", "They cause syntax errors"]}
+answer="They're shared across calls"
+explanation="The same mutable object is reused for all function calls, causing unexpected state sharing."
+/>
+
+<QuizMCQ
+question="What makes binary search O(log n)?"
+choices={["It uses recursion", "It's implemented efficiently", "It halves the search space each step", "It works on sorted data"]}
+answer="It halves the search space each step"
+explanation="Each comparison eliminates half of the remaining possibilities, creating logarithmic growth."
+/>
+
+<QuizMCQ
+question="When analyzing nested loops where outer runs 'a' times and inner runs 'b' times, the complexity is:"
+choices={["O(a + b)", "O(a × b)", "O(max(a, b))", "O(a²)"]}
+answer="O(a × b)"
+explanation="Nested loops multiply: for each of the 'a' outer iterations, we do 'b' inner work."
+/>
+
+---
+
+## 🏆 Course Completion
+
+### Your Progress
+- ✅ **Control Flow Mastery**: Loops, conditionals, pattern matching
+- ✅ **Data Structure Understanding**: Lists, dictionaries, mutability concepts  
+- ✅ **Algorithm Analysis**: Big-O notation, complexity classes
+- ✅ **Problem Solving**: Search algorithms, optimization techniques
+- ✅ **Code Quality**: Best practices, debugging, testing
+
+### Unlock Your Certificate
+
+Complete all sections above to earn your **Python Foundations Certificate**! 
+
+<CartoonCard emoji="🎓" title="Congratulations!" subtitle="You've mastered Python fundamentals">
+You now have a solid foundation in programming concepts that will serve you well in any technical field. From here, you can tackle advanced topics with confidence!
+</CartoonCard>
+
+**What's Next?**
+- Choose a [mini-project](/python/review) to cement your learning
+- Explore advanced topics like object-oriented programming
+- Build something amazing and share it with the community!
+
+---
+
+*Ready to put your skills to the test? Head to the [Review & Next Steps](/python/review) section for exciting project ideas!*

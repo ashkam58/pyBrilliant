@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
 :root {
   --radius: 16px;
 }
 
 html, body {
   @apply bg-gradient-to-b from-indigo-50 to-pink-50 min-h-screen text-slate-800;
+  font-family: 'Comic Neue', sans-serif;
 }
 .card {
   @apply rounded-2xl bg-white/80 backdrop-blur p-6 shadow-soft border border-black/5;
