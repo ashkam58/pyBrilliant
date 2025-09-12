@@ -1,0 +1,311 @@
+import JavaCodeRunner from '@/components/java/JavaCodeRunner'
+import { Quiz } from '@/components/Quiz'
+
+# Decision Making 🎯
+
+<div className="text-center py-6">
+  <div className="text-6xl mb-4">🎯</div>
+  <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-4">
+    Decision Making
+  </h1>
+  <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+    Learn how to make your programs smart with conditional statements!
+  </p>
+</div>
+
+---
+
+## Making Decisions in Code 🤔
+
+Just like in real life, programs need to make decisions. Java provides several ways to control the flow of your program based on different conditions.
+
+## The if Statement 🚦
+
+The most basic decision-making structure:
+
+<JavaCodeRunner
+  code={`public class BasicIf {
+    public static void main(String[] args) {
+        int temperature = 75;
+        
+        if (temperature > 80) {
+            System.out.println("It's hot outside! 🌞");
+        }
+        
+        if (temperature <= 80) {
+            System.out.println("It's nice weather today! 😊");
+        }
+        
+        // Check age for voting
+        int age = 18;
+        if (age >= 18) {
+            System.out.println("You can vote! 🗳️");
+        }
+    }
+}`}
+/>
+
+## if-else Statements 🔀
+
+When you want to do one thing OR another:
+
+<JavaCodeRunner
+  code={`public class IfElse {
+    public static void main(String[] args) {
+        int score = 85;
+        
+        if (score >= 90) {
+            System.out.println("Excellent! Grade: A 🌟");
+        } else if (score >= 80) {
+            System.out.println("Good job! Grade: B 👍");
+        } else if (score >= 70) {
+            System.out.println("Not bad! Grade: C 👌");
+        } else if (score >= 60) {
+            System.out.println("You passed! Grade: D 😅");
+        } else {
+            System.out.println("Better luck next time! Grade: F 😔");
+        }
+        
+        // Simple true/false check
+        boolean isRaining = false;
+        if (isRaining) {
+            System.out.println("Take an umbrella! ☂️");
+        } else {
+            System.out.println("Enjoy the sunshine! ☀️");
+        }
+    }
+}`}
+/>
+
+## Logical Operators 🧠
+
+Combine multiple conditions with logical operators:
+
+- **&&** (AND) - Both conditions must be true
+- **||** (OR) - At least one condition must be true  
+- **!** (NOT) - Reverses the condition
+
+<JavaCodeRunner
+  code={`public class LogicalOperators {
+    public static void main(String[] args) {
+        int age = 20;
+        boolean hasLicense = true;
+        boolean hasInsurance = true;
+        
+        // AND operator - both must be true
+        if (age >= 18 && hasLicense) {
+            System.out.println("You can drive! 🚗");
+        }
+        
+        // Multiple AND conditions
+        if (age >= 18 && hasLicense && hasInsurance) {
+            System.out.println("You're ready to hit the road! 🛣️");
+        }
+        
+        // OR operator - at least one must be true
+        boolean isWeekend = true;
+        boolean isHoliday = false;
+        
+        if (isWeekend || isHoliday) {
+            System.out.println("No work today! 🎉");
+        }
+        
+        // NOT operator
+        boolean isWorking = false;
+        if (!isWorking) {
+            System.out.println("Time to relax! 😌");
+        }
+    }
+}`}
+/>
+
+## Comparison Operators ⚖️
+
+Use these to compare values:
+
+- **==** Equal to
+- **!=** Not equal to
+- **>** Greater than
+- **<** Less than
+- **>=** Greater than or equal to
+- **<=** Less than or equal to
+
+<JavaCodeRunner
+  code={`public class Comparisons {
+    public static void main(String[] args) {
+        int playerScore = 1250;
+        int highScore = 1000;
+        
+        if (playerScore > highScore) {
+            System.out.println("New high score! 🏆");
+        }
+        
+        String password = "secret123";
+        String userInput = "secret123";
+        
+        // For strings, use .equals() method
+        if (password.equals(userInput)) {
+            System.out.println("Access granted! ✅");
+        } else {
+            System.out.println("Wrong password! ❌");
+        }
+        
+        // Number comparisons
+        int lives = 3;
+        if (lives == 0) {
+            System.out.println("Game Over! 💀");
+        } else if (lives == 1) {
+            System.out.println("Last chance! ⚠️");
+        } else {
+            System.out.println("Lives remaining: " + lives + " ❤️");
+        }
+    }
+}`}
+/>
+
+## The switch Statement 🎛️
+
+When you have many possible values to check:
+
+<JavaCodeRunner
+  code={`public class SwitchDemo {
+    public static void main(String[] args) {
+        int dayOfWeek = 3;
+        
+        switch (dayOfWeek) {
+            case 1:
+                System.out.println("Monday - Start of the work week! 💼");
+                break;
+            case 2:
+                System.out.println("Tuesday - Getting into the groove! 📈");
+                break;
+            case 3:
+                System.out.println("Wednesday - Hump day! 🐪");
+                break;
+            case 4:
+                System.out.println("Thursday - Almost there! 🎯");
+                break;
+            case 5:
+                System.out.println("Friday - TGIF! 🎉");
+                break;
+            case 6:
+            case 7:
+                System.out.println("Weekend time! 🏖️");
+                break;
+            default:
+                System.out.println("Invalid day!");
+                break;
+        }
+        
+        // Switch with strings (Java 7+)
+        String grade = "B";
+        switch (grade) {
+            case "A":
+                System.out.println("Outstanding! 🌟");
+                break;
+            case "B":
+                System.out.println("Well done! 👏");
+                break;
+            case "C":
+                System.out.println("Good effort! 👍");
+                break;
+            default:
+                System.out.println("Keep trying! 💪");
+        }
+    }
+}`}
+/>
+
+## Practice Challenge 🎯
+
+<Quiz
+  question="What will this code print? `int x = 10; if (x > 5 && x < 15) { System.out.println('Yes'); } else { System.out.println('No'); }`"
+  options={[
+    "Yes",
+    "No", 
+    "Nothing",
+    "Error"
+  ]}
+  correctAnswer={0}
+  explanation="Since x = 10, and 10 > 5 AND 10 < 15 are both true, the condition (x > 5 && x < 15) is true, so 'Yes' is printed."
+/>
+
+## Nested if Statements 🪆
+
+You can put if statements inside other if statements:
+
+<JavaCodeRunner
+  code={`public class NestedIf {
+    public static void main(String[] args) {
+        boolean isOnline = true;
+        boolean hasInternet = true;
+        int batteryLevel = 85;
+        
+        if (isOnline) {
+            System.out.println("User is online! 🟢");
+            
+            if (hasInternet) {
+                System.out.println("Internet connection is good! 📶");
+                
+                if (batteryLevel > 20) {
+                    System.out.println("Battery level is fine! 🔋");
+                    System.out.println("Ready for video call! 📹");
+                } else {
+                    System.out.println("Low battery warning! ⚠️");
+                }
+            } else {
+                System.out.println("No internet connection! 📵");
+            }
+        } else {
+            System.out.println("User is offline! 🔴");
+        }
+    }
+}`}
+/>
+
+## Real-World Example: Simple Game 🎮
+
+Let's create a simple number guessing game:
+
+<JavaCodeRunner
+  code={`import java.util.Scanner;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int secretNumber = 42;
+        
+        System.out.println("🎯 Number Guessing Game!");
+        System.out.println("I'm thinking of a number between 1 and 100...");
+        System.out.print("What's your guess? ");
+        
+        int guess = scanner.nextInt();
+        
+        if (guess == secretNumber) {
+            System.out.println("🎉 Congratulations! You got it!");
+        } else if (guess < secretNumber) {
+            System.out.println("📈 Too low! The number is higher.");
+        } else {
+            System.out.println("📉 Too high! The number is lower.");
+        }
+        
+        // Provide encouragement based on how close they were
+        int difference = Math.abs(guess - secretNumber);
+        if (difference <= 5) {
+            System.out.println("🔥 You were very close!");
+        } else if (difference <= 15) {
+            System.out.println("👍 Not bad, getting warmer!");
+        } else {
+            System.out.println("🧊 Pretty far off, but keep trying!");
+        }
+        
+        scanner.close();
+    }
+}`}
+/>
+
+## Next Steps 🚀
+
+Excellent work mastering decision making in Java! You now know how to make your programs respond intelligently to different situations.
+
+Next up: **Loop Mastery** - Learn how to repeat actions efficiently! 🔄

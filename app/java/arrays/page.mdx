@@ -1,0 +1,340 @@
+import JavaCodeRunner from '@/components/java/JavaCodeRunner'
+import { Quiz } from '@/components/Quiz'
+
+# Array Adventures 📚
+
+<div className="text-center py-6">
+  <div className="text-6xl mb-4">📚</div>
+  <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4">
+    Array Adventures
+  </h1>
+  <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+    Master the art of storing and manipulating collections of data!
+  </p>
+</div>
+
+---
+
+## What are Arrays? 🗂️
+
+Arrays are like containers that can hold multiple values of the same type. Think of them as numbered boxes where you can store items and access them by their position (index).
+
+## Creating and Using Arrays 🎯
+
+<JavaCodeRunner
+  code={`public class ArrayBasics {
+    public static void main(String[] args) {
+        // Creating arrays different ways
+        int[] numbers = {10, 20, 30, 40, 50};
+        String[] fruits = new String[3];
+        fruits[0] = "Apple";
+        fruits[1] = "Banana"; 
+        fruits[2] = "Orange";
+        
+        // Display array contents
+        System.out.println("🔢 Numbers array:");
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("Index " + i + ": " + numbers[i]);
+        }
+        
+        System.out.println("\\n🍎 Fruits array:");
+        for (String fruit : fruits) {
+            System.out.println("- " + fruit);
+        }
+        
+        // Array properties
+        System.out.println("\\n📊 Array Info:");
+        System.out.println("Numbers length: " + numbers.length);
+        System.out.println("First number: " + numbers[0]);
+        System.out.println("Last number: " + numbers[numbers.length - 1]);
+    }
+}`}
+/>
+
+## Array Operations 🔄
+
+<JavaCodeRunner
+  code={`public class ArrayOperations {
+    public static void main(String[] args) {
+        int[] scores = {85, 92, 78, 96, 88, 74, 95};
+        
+        // Find maximum and minimum
+        int max = scores[0];
+        int min = scores[0];
+        int sum = 0;
+        
+        for (int score : scores) {
+            if (score > max) max = score;
+            if (score < min) min = score;
+            sum += score;
+        }
+        
+        double average = (double) sum / scores.length;
+        
+        System.out.println("📊 Score Analysis:");
+        System.out.println("Highest score: " + max + " 🏆");
+        System.out.println("Lowest score: " + min);
+        System.out.println("Average score: " + String.format("%.1f", average));
+        System.out.println("Total scores: " + scores.length);
+        
+        // Count scores above average
+        int aboveAverage = 0;
+        for (int score : scores) {
+            if (score > average) aboveAverage++;
+        }
+        System.out.println("Scores above average: " + aboveAverage);
+        
+        // Search for a specific score
+        int target = 96;
+        boolean found = false;
+        int position = -1;
+        
+        for (int i = 0; i < scores.length; i++) {
+            if (scores[i] == target) {
+                found = true;
+                position = i;
+                break;
+            }
+        }
+        
+        if (found) {
+            System.out.println("\\n🔍 Score " + target + " found at position " + position);
+        } else {
+            System.out.println("\\n❌ Score " + target + " not found");
+        }
+    }
+}`}
+/>
+
+## Two-Dimensional Arrays 🎲
+
+<JavaCodeRunner
+  code={`public class TwoDArrays {
+    public static void main(String[] args) {
+        // Creating a 2D array (like a table)
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        
+        System.out.println("🎲 3x3 Matrix:");
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        
+        // Student grades example
+        String[] students = {"Alice", "Bob", "Charlie"};
+        int[][] grades = {
+            {85, 92, 78}, // Alice's grades
+            {90, 88, 95}, // Bob's grades  
+            {76, 89, 92}  // Charlie's grades
+        };
+        
+        System.out.println("\\n📚 Student Grade Report:");
+        for (int i = 0; i < students.length; i++) {
+            System.out.print(students[i] + ": ");
+            int total = 0;
+            for (int j = 0; j < grades[i].length; j++) {
+                System.out.print(grades[i][j] + " ");
+                total += grades[i][j];
+            }
+            double avg = (double) total / grades[i].length;
+            System.out.println("(Avg: " + String.format("%.1f", avg) + ")");
+        }
+    }
+}`}
+/>
+
+## ArrayList - Dynamic Arrays 📈
+
+<JavaCodeRunner
+  code={`import java.util.ArrayList;
+
+public class ArrayListDemo {
+    public static void main(String[] args) {
+        // ArrayList can grow and shrink
+        ArrayList<String> todoList = new ArrayList<>();
+        
+        // Adding items
+        todoList.add("Learn Java ☕");
+        todoList.add("Practice coding 💻");
+        todoList.add("Build a project 🏗️");
+        todoList.add("Get a job 💼");
+        
+        System.out.println("📝 Todo List:");
+        for (int i = 0; i < todoList.size(); i++) {
+            System.out.println((i + 1) + ". " + todoList.get(i));
+        }
+        
+        // Modifying the list
+        todoList.add(1, "Read documentation 📖"); // Insert at index 1
+        todoList.set(0, "Master Java ☕"); // Replace item at index 0
+        
+        System.out.println("\\n📝 Updated Todo List:");
+        for (String item : todoList) {
+            System.out.println("- " + item);
+        }
+        
+        // Removing items
+        todoList.remove("Practice coding 💻"); // Remove by value
+        todoList.remove(0); // Remove by index
+        
+        System.out.println("\\n📝 Final Todo List:");
+        for (String item : todoList) {
+            System.out.println("- " + item);
+        }
+        
+        System.out.println("\\nList size: " + todoList.size());
+        System.out.println("Is empty: " + todoList.isEmpty());
+        System.out.println("Contains 'Build a project 🏗️': " + todoList.contains("Build a project 🏗️"));
+    }
+}`}
+/>
+
+## Practice Challenge 🎯
+
+<Quiz
+  question="What is the output of: `int[] arr = {5, 10, 15}; System.out.println(arr[1]);`"
+  options={[
+    "5",
+    "10", 
+    "15",
+    "Error"
+  ]}
+  correctAnswer={1}
+  explanation="Array indices start at 0, so arr[1] refers to the second element, which is 10."
+/>
+
+## Array Sorting and Searching 🔍
+
+<JavaCodeRunner
+  code={`import java.util.Arrays;
+
+public class ArraySortSearch {
+    public static void main(String[] args) {
+        int[] numbers = {64, 25, 12, 22, 11, 90, 88, 76, 50, 42};
+        
+        System.out.println("🔢 Original array:");
+        System.out.println(Arrays.toString(numbers));
+        
+        // Sort the array
+        Arrays.sort(numbers);
+        System.out.println("\\n📈 Sorted array:");
+        System.out.println(Arrays.toString(numbers));
+        
+        // Binary search (only works on sorted arrays)
+        int target = 22;
+        int index = Arrays.binarySearch(numbers, target);
+        System.out.println("\\n🔍 Searching for " + target + ":");
+        if (index >= 0) {
+            System.out.println("Found at index " + index);
+        } else {
+            System.out.println("Not found");
+        }
+        
+        // String array sorting
+        String[] names = {"Charlie", "Alice", "Bob", "David"};
+        System.out.println("\\n👥 Original names:");
+        System.out.println(Arrays.toString(names));
+        
+        Arrays.sort(names);
+        System.out.println("\\n📝 Sorted names:");
+        System.out.println(Arrays.toString(names));
+    }
+}`}
+/>
+
+## Real-World Example: Grade Calculator 📊
+
+<JavaCodeRunner
+  code={`import java.util.ArrayList;
+import java.util.Arrays;
+
+public class GradeCalculator {
+    
+    public static double calculateAverage(int[] grades) {
+        int sum = 0;
+        for (int grade : grades) {
+            sum += grade;
+        }
+        return (double) sum / grades.length;
+    }
+    
+    public static String getLetterGrade(double average) {
+        if (average >= 90) return "A";
+        else if (average >= 80) return "B";
+        else if (average >= 70) return "C";
+        else if (average >= 60) return "D";
+        else return "F";
+    }
+    
+    public static void main(String[] args) {
+        // Student data
+        String[] students = {"Emma", "Liam", "Olivia", "Noah", "Ava"};
+        int[][] allGrades = {
+            {95, 87, 92, 89, 96},  // Emma
+            {78, 85, 90, 82, 88},  // Liam
+            {92, 95, 88, 94, 91},  // Olivia
+            {85, 89, 87, 90, 86},  // Noah
+            {76, 82, 79, 85, 83}   // Ava
+        };
+        
+        System.out.println("🎓 Class Grade Report");
+        System.out.println("=" .repeat(50));
+        
+        ArrayList<Double> classAverages = new ArrayList<>();
+        
+        for (int i = 0; i < students.length; i++) {
+            double avg = calculateAverage(allGrades[i]);
+            String letter = getLetterGrade(avg);
+            classAverages.add(avg);
+            
+            System.out.printf("%-8s: %s -> %.1f%% (%s)\\n", 
+                students[i], Arrays.toString(allGrades[i]), avg, letter);
+        }
+        
+        // Calculate class statistics
+        double classSum = 0;
+        for (double avg : classAverages) {
+            classSum += avg;
+        }
+        double classAverage = classSum / classAverages.size();
+        
+        System.out.println("\\n📊 Class Statistics:");
+        System.out.println("Class Average: " + String.format("%.1f", classAverage) + "%");
+        System.out.println("Class Grade: " + getLetterGrade(classAverage));
+        
+        // Find top performer
+        double highest = classAverages.get(0);
+        int topIndex = 0;
+        for (int i = 1; i < classAverages.size(); i++) {
+            if (classAverages.get(i) > highest) {
+                highest = classAverages.get(i);
+                topIndex = i;
+            }
+        }
+        
+        System.out.println("🏆 Top Performer: " + students[topIndex] + 
+                         " (" + String.format("%.1f", highest) + "%)");
+    }
+}`}
+/>
+
+## Array Best Practices 💡
+
+1. **Always check array bounds** - Don't access `arr[arr.length]`
+2. **Use enhanced for loops** when you don't need the index
+3. **Initialize arrays properly** - All elements start with default values
+4. **Consider ArrayList** for dynamic sizing needs
+5. **Use Arrays.toString()** for easy printing
+6. **Remember arrays are objects** - They're passed by reference
+
+## Next Steps 🚀
+
+Outstanding work with arrays! You now understand how to store and manipulate collections of data efficiently. This knowledge is essential for building real applications.
+
+Final destination: **Object-Oriented Programming** - Learn to create your own custom data types! 🏗️

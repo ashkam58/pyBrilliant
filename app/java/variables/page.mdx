@@ -1,0 +1,141 @@
+import JavaCodeRunner from '@/components/java/JavaCodeRunner'
+import { Quiz } from '@/components/Quiz'
+
+# Variables & Data Types 📊
+
+<div className="text-center py-6">
+  <div className="text-6xl mb-4">📊</div>
+  <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+    Variables & Data Types
+  </h1>
+  <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+    Learn how to store and manipulate different types of data in Java!
+  </p>
+</div>
+
+---
+
+## What are Variables? 🎯
+
+In Java, variables are containers that store data values. Think of them as labeled boxes where you can put different types of information.
+
+### Basic Data Types
+
+Java has several primitive data types:
+
+- **int** - Whole numbers (e.g., 42, -17, 0)
+- **double** - Decimal numbers (e.g., 3.14, -2.5)
+- **boolean** - True or false values
+- **char** - Single characters (e.g., 'A', '5', '@')
+- **String** - Text (e.g., "Hello World")
+
+## Declaring Variables 🏗️
+
+Here's how you declare variables in Java:
+
+<JavaCodeRunner
+  code={`public class VariablesDemo {
+    public static void main(String[] args) {
+        // Integer variable
+        int age = 25;
+        
+        // Double variable
+        double price = 19.99;
+        
+        // Boolean variable
+        boolean isStudent = true;
+        
+        // String variable
+        String name = "Alice";
+        
+        // Print all variables
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Price: $" + price);
+        System.out.println("Is Student: " + isStudent);
+    }
+}`}
+/>
+
+## Variable Rules 📋
+
+When naming variables in Java:
+
+1. **Start with a letter** (a-z, A-Z), underscore (_), or dollar sign ($)
+2. **Can contain letters, digits, underscores, and dollar signs**
+3. **Cannot be Java keywords** (like `int`, `class`, `public`)
+4. **Case-sensitive** (`myVar` and `MyVar` are different)
+5. **Use camelCase** convention (e.g., `firstName`, `totalAmount`)
+
+## Getting User Input 🎤
+
+Java uses the `Scanner` class to get input from users:
+
+<JavaCodeRunner
+  code={`import java.util.Scanner;
+
+public class UserInput {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt();
+        
+        System.out.println("Hello " + name + "!");
+        System.out.println("You are " + age + " years old.");
+        
+        scanner.close();
+    }
+}`}
+/>
+
+## Practice Challenge 🎯
+
+<Quiz
+  question="Which of the following is a valid Java variable declaration?"
+  options={[
+    "int 123age = 25;",
+    "double my-price = 19.99;",
+    "String firstName = \"John\";",
+    "boolean class = true;"
+  ]}
+  correctAnswer={2}
+  explanation="Option 3 is correct! Variable names cannot start with numbers, contain hyphens, or use Java keywords like 'class'."
+/>
+
+## Type Conversion 🔄
+
+Sometimes you need to convert between data types:
+
+<JavaCodeRunner
+  code={`public class TypeConversion {
+    public static void main(String[] args) {
+        // Automatic conversion (widening)
+        int num = 100;
+        double decimal = num;  // int to double
+        
+        // Manual conversion (narrowing)
+        double pi = 3.14159;
+        int rounded = (int) pi;  // double to int
+        
+        // String conversion
+        String ageStr = "25";
+        int age = Integer.parseInt(ageStr);
+        
+        System.out.println("Original int: " + num);
+        System.out.println("As double: " + decimal);
+        System.out.println("Pi: " + pi);
+        System.out.println("Rounded: " + rounded);
+        System.out.println("Age from string: " + age);
+    }
+}`}
+/>
+
+## Next Steps 🚀
+
+Great job learning about variables and data types! In the next lesson, we'll explore how to make decisions in your code using conditional statements.
+
+Ready to continue your Java journey? Let's move on to **Decision Making**! 🎯

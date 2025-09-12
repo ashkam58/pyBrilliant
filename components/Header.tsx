@@ -1,9 +1,16 @@
 'use client'
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  
+  // Determine CTA button based on current path
+  const isJavaPath = pathname?.startsWith('/java')
+  const ctaLink = isJavaPath ? '/java/intro' : '/python/intro'
+  const ctaText = isJavaPath ? 'Start Java ☕' : 'Start Learning 🚀'
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b-4 border-gradient-to-r from-blue-400 to-purple-400 shadow-lg">
@@ -37,6 +44,14 @@ export default function Header() {
               <span>🐍</span>
               <span>Python Course</span>
             </Link>
+
+            <Link 
+              href="/java" 
+              className="flex items-center space-x-1 px-4 py-2 rounded-full bg-gradient-to-r from-orange-100 to-red-100 hover:from-orange-200 hover:to-red-200 text-gray-700 font-medium transition-all duration-300 hover:scale-105 hover:shadow-md"
+            >
+              <span>☕</span>
+              <span>Java Course</span>
+            </Link>
             
             <Link 
               href="/about" 
@@ -48,11 +63,10 @@ export default function Header() {
 
             {/* CTA Button */}
             <Link 
-              href="/python/intro" 
+              href={ctaLink}
               className="flex items-center space-x-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
-              <span>🚀</span>
-              <span>Start Learning</span>
+              <span>{ctaText}</span>
             </Link>
           </div>
 
@@ -88,6 +102,15 @@ export default function Header() {
                 <span>🐍</span>
                 <span>Python Course</span>
               </Link>
+
+              <Link 
+                href="/java"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100 text-gray-700 font-medium transition-all duration-300"
+              >
+                <span>☕</span>
+                <span>Java Course</span>
+              </Link>
               
               <Link 
                 href="/about"
@@ -99,12 +122,11 @@ export default function Header() {
               </Link>
 
               <Link 
-                href="/python/intro"
+                href={ctaLink}
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center justify-center space-x-2 px-6 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg"
               >
-                <span>🚀</span>
-                <span>Start Learning</span>
+                <span>{ctaText}</span>
               </Link>
             </div>
           </div>

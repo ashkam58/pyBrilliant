@@ -1,0 +1,409 @@
+import JavaCodeRunner from '@/components/java/JavaCodeRunner'
+import { Quiz } from '@/components/Quiz'
+
+# Loop Mastery 🔄
+
+<div className="text-center py-6">
+  <div className="text-6xl mb-4">🔄</div>
+  <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+    Loop Mastery
+  </h1>
+  <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+    Master the art of repetition and automation in Java!
+  </p>
+</div>
+
+---
+
+## Why Loops? 🤔
+
+Imagine having to write the same code 100 times... That's where loops come to the rescue! Loops let you repeat code efficiently without copying and pasting.
+
+## The for Loop 🎯
+
+Perfect when you know exactly how many times you want to repeat something:
+
+<JavaCodeRunner
+  code={`public class ForLoopBasics {
+    public static void main(String[] args) {
+        // Basic counting
+        System.out.println("🚀 Countdown:");
+        for (int i = 10; i >= 1; i--) {
+            System.out.println(i);
+        }
+        System.out.println("Blast off! 🎆");
+        
+        // Print numbers with style
+        System.out.println("\\n✨ Magic numbers:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Round " + i + ": The magic number is " + (i * i));
+        }
+        
+        // Even numbers only
+        System.out.println("\\n🎲 Even numbers from 2 to 20:");
+        for (int i = 2; i <= 20; i += 2) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+}`}
+/>
+
+## The while Loop ⏰
+
+Perfect when you don't know exactly how many iterations you need:
+
+<JavaCodeRunner
+  code={`public class WhileLoopDemo {
+    public static void main(String[] args) {
+        // Doubling numbers
+        System.out.println("📈 Doubling game:");
+        int number = 1;
+        while (number <= 100) {
+            System.out.println(number);
+            number *= 2;  // Double the number
+        }
+        
+        // User input simulation (normally would use Scanner)
+        System.out.println("\\n🎮 Password attempts:");
+        String correctPassword = "java123";
+        String userPassword = "wrong";
+        int attempts = 0;
+        
+        while (!userPassword.equals(correctPassword) && attempts < 3) {
+            attempts++;
+            System.out.println("Attempt " + attempts + ": Trying password...");
+            
+            // Simulating different attempts
+            if (attempts == 1) userPassword = "password";
+            else if (attempts == 2) userPassword = "123456";
+            else userPassword = "java123";
+            
+            if (userPassword.equals(correctPassword)) {
+                System.out.println("✅ Access granted!");
+            } else if (attempts < 3) {
+                System.out.println("❌ Wrong password, try again!");
+            }
+        }
+        
+        if (attempts >= 3 && !userPassword.equals(correctPassword)) {
+            System.out.println("🔒 Account locked!");
+        }
+    }
+}`}
+/>
+
+## The do-while Loop 🔁
+
+Guarantees the code runs at least once:
+
+<JavaCodeRunner
+  code={`public class DoWhileDemo {
+    public static void main(String[] args) {
+        System.out.println("🎲 Rolling dice until we get a 6:");
+        
+        int roll;
+        int attempts = 0;
+        
+        do {
+            // Simulate rolling a dice (1-6)
+            roll = (int)(Math.random() * 6) + 1;
+            attempts++;
+            System.out.println("Roll " + attempts + ": You rolled a " + roll);
+            
+            if (roll == 6) {
+                System.out.println("🎉 Winner! You got a 6!");
+            }
+        } while (roll != 6 && attempts < 10);
+        
+        if (attempts >= 10) {
+            System.out.println("😅 Gave up after 10 attempts!");
+        }
+        
+        // Menu system example
+        System.out.println("\\n📋 Menu Demo:");
+        int choice;
+        int menuRound = 0;
+        
+        do {
+            menuRound++;
+            System.out.println("--- Menu (Round " + menuRound + ") ---");
+            System.out.println("1. Play Game");
+            System.out.println("2. View Scores");
+            System.out.println("3. Exit");
+            
+            // Simulate user choosing different options
+            if (menuRound == 1) choice = 1;
+            else if (menuRound == 2) choice = 2;
+            else choice = 3;
+            
+            System.out.println("Choice selected: " + choice);
+            
+            switch (choice) {
+                case 1:
+                    System.out.println("🎮 Starting game...");
+                    break;
+                case 2:
+                    System.out.println("🏆 High Score: 1250");
+                    break;
+                case 3:
+                    System.out.println("👋 Goodbye!");
+                    break;
+            }
+            System.out.println();
+        } while (choice != 3);
+    }
+}`}
+/>
+
+## Enhanced for Loop (for-each) 🌟
+
+Perfect for going through arrays and collections:
+
+<JavaCodeRunner
+  code={`public class EnhancedForLoop {
+    public static void main(String[] args) {
+        // Array of favorite programming languages
+        String[] languages = {"Java", "Python", "JavaScript", "C++", "Go"};
+        
+        System.out.println("💻 My favorite programming languages:");
+        int rank = 1;
+        for (String language : languages) {
+            System.out.println(rank + ". " + language + " ⭐");
+            rank++;
+        }
+        
+        // Array of numbers
+        int[] scores = {95, 87, 92, 78, 96, 89};
+        
+        System.out.println("\\n📊 Test Scores Analysis:");
+        int total = 0;
+        int highest = scores[0];
+        int lowest = scores[0];
+        
+        for (int score : scores) {
+            total += score;
+            if (score > highest) highest = score;
+            if (score < lowest) lowest = score;
+            
+            // Grade each score
+            String grade = "";
+            if (score >= 90) grade = "A";
+            else if (score >= 80) grade = "B"; 
+            else if (score >= 70) grade = "C";
+            else grade = "F";
+            
+            System.out.println("Score: " + score + " (Grade: " + grade + ")");
+        }
+        
+        double average = (double) total / scores.length;
+        System.out.println("\\n📈 Summary:");
+        System.out.println("Average: " + String.format("%.1f", average));
+        System.out.println("Highest: " + highest);
+        System.out.println("Lowest: " + lowest);
+    }
+}`}
+/>
+
+## Nested Loops 🪆
+
+Loops inside loops - great for patterns and 2D structures:
+
+<JavaCodeRunner
+  code={`public class NestedLoops {
+    public static void main(String[] args) {
+        // Multiplication table
+        System.out.println("🔢 Multiplication Table (1-5):");
+        System.out.print("   ");
+        for (int i = 1; i <= 5; i++) {
+            System.out.printf("%4d", i);
+        }
+        System.out.println();
+        
+        for (int i = 1; i <= 5; i++) {
+            System.out.printf("%2d:", i);
+            for (int j = 1; j <= 5; j++) {
+                System.out.printf("%4d", i * j);
+            }
+            System.out.println();
+        }
+        
+        // Star patterns
+        System.out.println("\\n⭐ Star Triangle:");
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("⭐ ");
+            }
+            System.out.println();
+        }
+        
+        // Number pyramid
+        System.out.println("\\n🔺 Number Pyramid:");
+        for (int i = 1; i <= 4; i++) {
+            // Print spaces
+            for (int j = 1; j <= 4 - i; j++) {
+                System.out.print(" ");
+            }
+            // Print numbers
+            for (int j = 1; j <= i; j++) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}`}
+/>
+
+## Loop Control: break and continue 🛑
+
+Control loop execution with `break` and `continue`:
+
+<JavaCodeRunner
+  code={`public class LoopControl {
+    public static void main(String[] args) {
+        // Using break to exit early
+        System.out.println("🔍 Finding first even number > 10:");
+        for (int i = 1; i <= 20; i++) {
+            if (i > 10 && i % 2 == 0) {
+                System.out.println("Found it! " + i);
+                break;  // Exit the loop immediately
+            }
+            System.out.println("Checking: " + i);
+        }
+        
+        // Using continue to skip iterations
+        System.out.println("\\n🎯 Only odd numbers from 1-10:");
+        for (int i = 1; i <= 10; i++) {
+            if (i % 2 == 0) {
+                continue;  // Skip even numbers
+            }
+            System.out.println("Odd number: " + i);
+        }
+        
+        // Real-world example: Processing valid data
+        System.out.println("\\n📋 Processing user scores:");
+        int[] userScores = {95, -5, 87, 150, 92, -10, 78};
+        
+        for (int score : userScores) {
+            // Skip invalid scores
+            if (score < 0 || score > 100) {
+                System.out.println("⚠️  Skipping invalid score: " + score);
+                continue;
+            }
+            
+            // Process valid score
+            String performance = "";
+            if (score >= 90) performance = "Excellent! 🌟";
+            else if (score >= 80) performance = "Good job! 👍";
+            else if (score >= 70) performance = "Keep it up! 💪";
+            else performance = "Needs improvement 📚";
+            
+            System.out.println("Score " + score + ": " + performance);
+        }
+    }
+}`}
+/>
+
+## Practice Challenge 🎯
+
+<Quiz
+  question="How many times will this loop run? `for (int i = 5; i < 15; i += 3) { System.out.println(i); }`"
+  options={[
+    "3 times",
+    "4 times", 
+    "5 times",
+    "10 times"
+  ]}
+  correctAnswer={1}
+  explanation="The loop starts at i=5, then i=8, i=11, i=14. When i becomes 17, the condition i < 15 is false, so it stops. The loop runs 4 times with values: 5, 8, 11, 14."
+/>
+
+## Real-World Example: Simple Calculator 🧮
+
+Let's build a calculator that keeps running until the user wants to quit:
+
+<JavaCodeRunner
+  code={`import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean keepRunning = true;
+        
+        System.out.println("🧮 Simple Calculator");
+        System.out.println("Operations: +, -, *, /, quit");
+        
+        while (keepRunning) {
+            System.out.println("\\n--- New Calculation ---");
+            System.out.print("Enter first number: ");
+            
+            // For demo, we'll simulate user input
+            double num1 = 10;
+            System.out.println(num1);
+            
+            System.out.print("Enter operation (+, -, *, /, quit): ");
+            String operation = "+";  // Simulated input
+            System.out.println(operation);
+            
+            if (operation.equals("quit")) {
+                keepRunning = false;
+                System.out.println("👋 Thanks for using the calculator!");
+                break;
+            }
+            
+            System.out.print("Enter second number: ");
+            double num2 = 5;  // Simulated input
+            System.out.println(num2);
+            
+            double result = 0;
+            boolean validOperation = true;
+            
+            switch (operation) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        System.out.println("❌ Error: Cannot divide by zero!");
+                        validOperation = false;
+                    }
+                    break;
+                default:
+                    System.out.println("❌ Invalid operation!");
+                    validOperation = false;
+            }
+            
+            if (validOperation) {
+                System.out.println("✅ Result: " + num1 + " " + operation + " " + num2 + " = " + result);
+            }
+            
+            // For demo purposes, we'll break after one calculation
+            break;
+        }
+        
+        scanner.close();
+    }
+}`}
+/>
+
+## Loop Best Practices 💡
+
+1. **Avoid infinite loops** - Always make sure your condition will eventually become false
+2. **Use meaningful variable names** - `i`, `j`, `k` are okay for simple counters
+3. **Choose the right loop type** - `for` for known iterations, `while` for unknown
+4. **Be careful with nested loops** - They can slow down your program
+5. **Use enhanced for loops** when possible for cleaner code
+
+## Next Steps 🚀
+
+Fantastic work mastering loops! You now have the power to automate repetitive tasks and create complex patterns.
+
+Coming up next: **Method Magic** - Learn how to organize your code into reusable functions! 🎩
