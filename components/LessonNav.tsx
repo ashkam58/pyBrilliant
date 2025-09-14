@@ -1,18 +1,15 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { PYTHON_COURSE, JAVA_COURSE } from '@/lib/course'
+import { PYTHON_COURSE } from '@/lib/course'
 
 export default function LessonNav() {
   const pathname = usePathname()
   
-  // Determine which course to show based on current path
-  const isJavaPath = pathname?.startsWith('/java')
-  const course = isJavaPath ? JAVA_COURSE : PYTHON_COURSE
-  const coursePrefix = isJavaPath ? '/java' : '/python'
-  const courseInfo = isJavaPath 
-    ? { title: 'Java Course', emoji: '☕', color: 'orange' }
-    : { title: 'Python Course', emoji: '🐍', color: 'blue' }
+  // Only show Python course now
+  const course = PYTHON_COURSE
+  const coursePrefix = '/python'
+  const courseInfo = { title: 'Python Course', emoji: '🐍', color: 'blue' }
   
   return (
     <nav className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/50 p-6 sticky top-24 overflow-y-auto max-h-screen">
@@ -27,18 +24,12 @@ export default function LessonNav() {
       <ul className="space-y-2">
         {course.map((ch, index) => {
           const href = `${coursePrefix}/${ch.slug}`
-          const active = pathname?.startsWith(href)
-          const colorClasses = courseInfo.color === 'orange'
-            ? {
-                active: 'bg-gradient-to-r from-orange-50 to-red-50 text-orange-700 font-semibold border-l-4 border-orange-400 shadow-sm',
-                activeNumber: 'bg-orange-100 text-orange-600',
-                activeIcon: 'text-orange-500'
-              }
-            : {
-                active: 'bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-semibold border-l-4 border-blue-400 shadow-sm',
-                activeNumber: 'bg-blue-100 text-blue-600',
-                activeIcon: 'text-blue-500'
-              }
+          const active = pathname === href
+          const colorClasses = {
+            active: 'bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-semibold border-l-4 border-blue-400 shadow-sm',
+            activeNumber: 'bg-blue-100 text-blue-600',
+            activeIcon: 'text-blue-500'
+          }
           
           return (
             <li key={ch.slug}>

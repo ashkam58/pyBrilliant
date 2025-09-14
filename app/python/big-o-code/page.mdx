@@ -1,0 +1,96 @@
+import BigOBarPlot from "@/components/dsa/BigOBarPlot";
+import OperationCounter from "@/components/dsa/OperationCounter";
+import BinarySearchViz from "@/components/dsa/BinarySearchViz";
+import SortingOverview from "@/components/dsa/SortingOverview";
+
+# Big-O Coding Playground
+
+Welcome to the coding-focused Big-O playground! Here, you'll see how different algorithms scale as you change input size, and visualize their growth with interactive charts.
+
+---
+
+## 1. Linear Search (O(n))
+
+Try searching for a value in a list. The number of steps grows with the list size.
+
+<OperationCounter algo="linear" />
+
+<BigOBarPlot />
+
+---
+
+## 2. Binary Search (O(log n))
+
+Binary search splits the list in half each time. See how much faster it is for large lists!
+
+<BinarySearchViz />
+
+<BigOBarPlot />
+
+---
+
+## 3. Sorting Algorithms
+
+Sorting is a classic way to compare Big-O. See how bubble sort, merge sort, and quicksort scale.
+
+<SortingOverview />
+
+<BigOBarPlot />
+
+---
+
+## 4. Custom Growth Playground
+
+Use the sliders and checkboxes below to compare constant, logarithmic, linear, and quadratic growth. Try changing n and see which explodes fastest!
+
+<BigOBarPlot />
+
+---
+
+
+---
+
+## Challenge: Guess the Complexity!
+
+<QuizMCQ
+question="Which algorithm has O(log n) complexity?"
+choices={["Linear search", "Binary search", "Bubble sort", "Selection sort"]}
+answer="Binary search"
+explanation="Binary search splits the list in half each time, making it O(log n)."
+/>
+
+<QuizMCQ
+question="If you double the input size for a quadratic algorithm, how does the work change?"
+choices={["Doubles", "Quadruples", "Stays the same", "Halves"]}
+answer="Quadruples"
+explanation="Quadratic growth means work scales with n², so doubling n makes work 4x."
+/>
+
+---
+
+## Custom Algorithm Challenge
+
+Try writing your own algorithm below and estimate its Big-O class. Discuss with your classmates or teacher!
+
+```python
+# Example: Count pairs in a list
+def count_pairs(lst):
+	count = 0
+	for i in range(len(lst)):
+		for j in range(i+1, len(lst)):
+			count += 1
+	return count
+# What is the Big-O complexity?
+# (Answer: O(n^2))
+```
+
+---
+
+## Key Takeaways
+
+- **O(1)**: Constant time — doesn't grow with input size.
+- **O(log n)**: Logarithmic — grows slowly, even for big inputs.
+- **O(n)**: Linear — grows directly with input size.
+- **O(n^2)**: Quadratic — explodes as input grows!
+
+Use the playground above to experiment and see these patterns in action.

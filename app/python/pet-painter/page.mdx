@@ -1,0 +1,456 @@
+
+import { Badge, Callout, Hint, Step, MCQ, Tiny } from "@/components/PetPainterComponents";
+
+/**
+ * Cartoon Code Quest — Python Pet Painter (Hour of Code)
+ * Audience: Grade 8 (and curious humans of any age)
+ * Theme: cozy, cartoon, friendly
+ * Format: MDX with lightweight interactive components
+ * Time: ~60 minutes
+ */
+
+
+
+/* -----------------------------------------
+   Title & Overview
+------------------------------------------*/
+
+# 🐢🎨 Cartoon Code Quest: **Python Pet Painter**
+
+Welcome, **Ashkam & Advait**! Today we code like friendly wizards and draw like turtles with jetpacks. We’ll build a tiny art app in **Python** using the `turtle` module. Think **Hour of Code** vibes: quick, playful, and proudly scrappy. By the end, you’ll have a colorful pet (cat, fish, or turtle) that celebrates with confetti.
+
+<Callout type="tip">
+<strong>Skills you collect:</strong> variables, functions, loops, events, and a sprinkle of randomness. Also: the noble art of debugging without panic.
+</Callout>
+
+## What you’ll build
+
+A cheerful program that asks which pet you want, draws a simple cartoon version with random colors, writes its name, and then launches confetti. Press <Badge>c</Badge> to toss more confetti and <Badge>r</Badge> to redraw.
+
+## Setup (2 min)
+
+- Use any Python environment that supports `turtle` (Replit works; on desktop, the standard Python installer is fine).  
+- Create a new file called `pet_painter.py`.
+
+<Callout type="note">
+If `turtle` isn't available where you’re running code, you can still follow the logic and peek the screenshots later. But `turtle` really shines here.
+</Callout>
+
+---
+
+## 🧭 Learning Map
+
+- **Step 1**: Meet the turtle & say hello
+- **Step 2**: Loops for shapes
+- **Step 3**: Functions = superpowers
+- **Step 4**: Random colors for cartoon vibes
+- **Step 5**: Ask the user (inputs!)
+- **Step 6**: Draw pets
+- **Step 7**: Keys & confetti (events)
+- **Step 8**: Polish & celebrate
+
+<Callout type="warn">
+Keyboard shortcuts can vary depending on the environment. If keys don't respond, it’s okay — your pet still looks fabulous.
+</Callout>
+
+---
+
+<Step num={1} title="Meet the turtle & say hello" minutes={6}>
+Paste this into `pet_painter.py` and run:
+
+```python
+import turtle as t
+
+screen = t.Screen()
+screen.title("Pet Painter 🐢🎨")
+
+pen = t.Turtle()
+pen.shape("turtle")
+pen.pensize(3)
+pen.speed(0)
+
+pen.write("Hello from Turtle Land!", align="center", font=("Arial", 16, "bold"))
+```
+
+<MCQ
+  question="What does t.Screen() do?"
+  options={[
+    "It creates the window where the turtle draws.",
+    "It downloads a big green turtle PNG.",
+    "It makes your code 10x faster automatically.",
+  ]}
+  correct={0}
+  explanation="The screen is the canvas. Without it, the turtle has nowhere to doodle."
+/>
+</Step>
+
+<Step num={2} title="Loops draw neat shapes" minutes={8}>
+We use a **loop** to repeat moves. Squares are just four forward steps + four turns.
+
+```python
+# Add below your previous code
+for _ in range(4):
+    pen.forward(100)
+    pen.right(90)
+```
+
+<Tiny>
+`range(4)` means: do it 4 times. The underscore `_` is a throwaway variable; we don’t need it.
+</Tiny>
+
+<MCQ
+  question="How many times does the loop run? for _ in range(6): ..."
+  options={["3", "5", "6", "It never stops!"]}
+  correct={2}
+  explanation="`range(6)` produces 0..5 → six rounds total."
+/>
+</Step>
+
+<Step num={3} title="Functions are superpowers" minutes={8}>
+We’ll bundle steps into **functions** so we can reuse them.
+
+```python
+# Reuse your screen + pen
+
+def draw_square(size=80):
+    for _ in range(4):
+        pen.forward(size)
+        pen.right(90)
+```
+
+<Hint title="Mini Challenge">
+Make `draw_triangle(size)` with three sides and 120° left turns.
+</Hint>
+</Step>
+
+<Step num={4} title="Random cartoon colors" minutes={7}>
+Cartoons love color. We’ll keep a palette and pick at random.
+
+```python
+import random
+
+colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#c77dff", "#ffb5e8", "#40e0d0"]
+
+def set_random_color():
+    pen.color(random.choice(colors))
+```
+
+<Callout type="tip">
+Computers don’t have taste; randomness gives fun surprises. If it picks a weird combo, that’s modern art.
+</Callout>
+</Step>
+
+<Step num={5} title="Ask the human (inputs!)" minutes={6}>
+We’ll politely ask which pet to draw. `turtle.Screen().textinput(title, prompt)` shows a tiny input box.
+
+```python
+choice = screen.textinput("Pet Painter", "Pick a pet: cat, fish, or turtle")
+if not choice:  # if user closed the dialog
+    choice = input("Pick a pet: cat, fish, or turtle: ")
+choice = choice.strip().lower()
+```
+
+<MCQ
+  question="What does .strip() do on a string?"
+  options={[
+    "Adds glitter emojis",
+    "Removes spaces at the start/end",
+    "Turns the text into a list",
+  ]}
+  correct={1}
+  explanation="We tidy the input so '  CAT  ' becomes 'cat'."
+/>
+</Step>
+
+<Step num={6} title="Draw simple cartoon pets" minutes={15}>
+We’ll make three functions: `pet_cat`, `pet_fish`, and `pet_turtle`. They use circles and triangles to suggest each animal. Not Pixar, but undeniably cute.
+
+```python
+# Simple helper shapes (filled)
+
+def filled_circle(r):
+    pen.begin_fill()
+    pen.circle(r)
+    pen.end_fill()
+
+
+def filled_triangle(side):
+    pen.begin_fill()
+    for _ in range(3):
+        pen.forward(side)
+        pen.left(120)
+    pen.end_fill()
+
+
+def pet_cat():
+    set_random_color(); filled_circle(60)  # face
+    # ears
+    set_random_color(); pen.up(); pen.goto(-40, 60); pen.setheading(0); pen.down(); filled_triangle(30)
+    set_random_color(); pen.up(); pen.goto(40, 60); pen.setheading(0); pen.down(); filled_triangle(30)
+    # eyes
+    for x in (-20, 20):
+        pen.up(); pen.goto(x, 20); pen.down()
+        pen.color("white"); pen.begin_fill(); pen.circle(8); pen.end_fill()
+        pen.color("black"); pen.begin_fill(); pen.circle(3); pen.end_fill()
+    # nose (tiny triangle)
+    pen.up(); pen.goto(0, 5); pen.down();
+    for _ in range(3):
+        pen.forward(10); pen.left(120)
+
+
+def pet_fish():
+    set_random_color(); pen.begin_fill(); pen.circle(80, 180); pen.circle(80, -180); pen.end_fill()  # body-ish
+    # tail
+    set_random_color(); pen.up(); pen.goto(80, 0); pen.setheading(0); pen.down()
+    for _ in range(2):
+        pen.begin_fill(); pen.forward(30); pen.left(120); pen.forward(30); pen.left(60); pen.end_fill(); pen.left(180)
+    # eye
+    pen.up(); pen.goto(-30, 10); pen.down(); pen.color("white"); pen.begin_fill(); pen.circle(10); pen.end_fill()
+    pen.color("black"); pen.begin_fill(); pen.circle(4); pen.end_fill()
+
+
+def pet_turtle():
+    set_random_color(); pen.begin_fill(); pen.circle(60); pen.end_fill()  # shell
+    # head
+    pen.up(); pen.goto(60, 0); pen.setheading(0); pen.down(); set_random_color(); filled_circle(20)
+    # legs
+    for pos in [(-40, -40), (-40, 40), (40, -40), (40, 40)]:
+        pen.up(); pen.goto(*pos); pen.down(); set_random_color(); filled_circle(15)
+```
+
+Glue the names to functions so we can call them neatly:
+
+```python
+pet_map = {
+    "cat": pet_cat,
+    "fish": pet_fish,
+    "turtle": pet_turtle,
+}
+
+pet_fn = pet_map.get(choice, pet_turtle)  # default to turtle if unknown
+```
+
+<Callout type="bug">
+If your turtle zooms off-screen, call `pen.home()` or `pen.goto(0, 0)` to reset the position. Turtles get excited.
+</Callout>
+</Step>
+
+<Step num={7} title="Events: keys & confetti party" minutes={8}>
+Time to celebrate. We’ll add a `confetti(n)` function and some keyboard shortcuts.
+
+```python
+import random  # (If you didn't already)
+
+def confetti(n=80):
+    pen.up()
+    for _ in range(n):
+        pen.goto(random.randint(-230, 230), random.randint(-170, 170))
+        pen.dot(random.randint(5, 15), random.choice(colors))
+    pen.down()
+
+# Draw the chosen pet at a cozy spot
+pen.up(); pen.goto(0, -60); pen.down()
+pet_fn()
+
+# Write a label
+pen.up(); pen.goto(0, -120); pen.down(); pen.color("black")
+pen.write(f"This is {choice.title()}!", align="center", font=("Arial", 18, "bold"))
+
+# Add keys: c = confetti, r = redraw
+
+def redraw():
+    pen.clear()
+    pen.up(); pen.goto(0, -60); pen.down()
+    pet_fn()
+    pen.up(); pen.goto(0, -120); pen.down(); pen.color("black")
+    pen.write(f"This is {choice.title()}!", align="center", font=("Arial", 18, "bold"))
+
+screen.listen()
+screen.onkey(lambda: confetti(100), "c")
+screen.onkey(redraw, "r")
+```
+
+<MCQ
+  question="What does screen.onkey(fn, 'c') mean?"
+  options={[
+    "Run fn when the 'c' key is pressed.",
+    "Change the window color to cyan.",
+    "It’s a cheat code to skip bugs.",
+  ]}
+  correct={0}
+  explanation="Events connect user actions (keys) to functions."
+/>
+</Step>
+
+<Step num={8} title="Polish & full program" minutes={10}>
+Here’s a clean version you can copy-paste into `pet_painter.py` if you want everything in one place:
+
+```python
+import turtle as t
+import random
+
+screen = t.Screen()
+screen.title("Pet Painter 🐢🎨")
+screen.bgcolor("#fcefe3")
+
+pen = t.Turtle()
+pen.shape("turtle")
+pen.pensize(3)
+pen.speed(0)
+
+colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#c77dff", "#ffb5e8", "#40e0d0"]
+
+# Helpers
+
+def set_random_color():
+    pen.color(random.choice(colors))
+
+def filled_circle(r):
+    pen.begin_fill(); pen.circle(r); pen.end_fill()
+
+def filled_triangle(side):
+    pen.begin_fill()
+    for _ in range(3):
+        pen.forward(side); pen.left(120)
+    pen.end_fill()
+
+# Pets
+
+def pet_cat():
+    set_random_color(); filled_circle(60)  # face
+    set_random_color(); pen.up(); pen.goto(-40, 60); pen.setheading(0); pen.down(); filled_triangle(30)
+    set_random_color(); pen.up(); pen.goto(40, 60); pen.setheading(0); pen.down(); filled_triangle(30)
+    for x in (-20, 20):
+        pen.up(); pen.goto(x, 20); pen.down()
+        pen.color("white"); pen.begin_fill(); pen.circle(8); pen.end_fill()
+        pen.color("black"); pen.begin_fill(); pen.circle(3); pen.end_fill()
+    pen.up(); pen.goto(0, 5); pen.down()
+    for _ in range(3):
+        pen.forward(10); pen.left(120)
+
+
+def pet_fish():
+    set_random_color(); pen.begin_fill(); pen.circle(80, 180); pen.circle(80, -180); pen.end_fill()
+    set_random_color(); pen.up(); pen.goto(80, 0); pen.setheading(0); pen.down()
+    for _ in range(2):
+        pen.begin_fill(); pen.forward(30); pen.left(120); pen.forward(30); pen.left(60); pen.end_fill(); pen.left(180)
+    pen.up(); pen.goto(-30, 10); pen.down(); pen.color("white"); pen.begin_fill(); pen.circle(10); pen.end_fill()
+    pen.color("black"); pen.begin_fill(); pen.circle(4); pen.end_fill()
+
+
+def pet_turtle():
+    set_random_color(); pen.begin_fill(); pen.circle(60); pen.end_fill()
+    pen.up(); pen.goto(60, 0); pen.setheading(0); pen.down(); set_random_color(); filled_circle(20)
+    for pos in [(-40, -40), (-40, 40), (40, -40), (40, 40)]:
+        pen.up(); pen.goto(*pos); pen.down(); set_random_color(); filled_circle(15)
+
+pet_map = {"cat": pet_cat, "fish": pet_fish, "turtle": pet_turtle}
+
+# Ask the user
+choice = screen.textinput("Pet Painter", "Pick a pet: cat, fish, or turtle")
+if not choice:
+    choice = input("Pick a pet: cat, fish, or turtle: ")
+choice = choice.strip().lower()
+pet_fn = pet_map.get(choice, pet_turtle)
+
+# Confetti!
+
+def confetti(n=100):
+    pen.up()
+    for _ in range(n):
+        pen.goto(random.randint(-230, 230), random.randint(-170, 170))
+        pen.dot(random.randint(5, 15), random.choice(colors))
+    pen.down()
+
+# Draw + label
+pen.up(); pen.goto(0, -60); pen.down(); pet_fn()
+pen.up(); pen.goto(0, -120); pen.down(); pen.color("black")
+pen.write(f"This is {choice.title()}!", align="center", font=("Arial", 18, "bold"))
+
+# Keys
+
+def redraw():
+    pen.clear()
+    pen.up(); pen.goto(0, -60); pen.down(); pet_fn()
+    pen.up(); pen.goto(0, -120); pen.down(); pen.color("black")
+    pen.write(f"This is {choice.title()}!", align="center", font=("Arial", 18, "bold"))
+
+screen.listen()
+screen.onkey(lambda: confetti(100), "c")
+screen.onkey(redraw, "r")
+
+screen.mainloop()
+```
+
+<Callout type="tip">
+Try pressing <Badge>c</Badge> a few times. Your turtle becomes a party planner.
+</Callout>
+</Step>
+
+---
+
+## Vocabulary & Memory Tricks
+
+- **Variable**: a labeled box that remembers a value.  
+- **Function**: a named recipe you can reuse.  
+- **Loop**: do it again (politely, a set number of times).  
+- **Event**: something happens (like a key press) → run a function.  
+- **Random**: ask the universe to surprise you.
+
+**Mnemonic**: *Very Fancy Llamas Eat Ravioli* → **V**ariables, **F**unctions, **L**oops, **E**vents, **R**andom.
+
+## Bug Clinic
+
+- “**NameError: set_random_color is not defined**” → The function must be defined before you call it (or at least in the same file).
+- “**IndentationError**” → Python cares about spacing. Make blocks line up consistently.
+- Nothing draws? Make sure you created the `screen` and `pen`, and didn’t forget `screen.mainloop()`.
+
+## Quick Quiz Wrap-up
+
+<MCQ
+  question="Which line picks a random color from the list?"
+  options={[
+    "pen.color(colors)",
+    "pen.color(random.choice(colors))",
+    "pen.color(colors[0])",
+  ]}
+  correct={1}
+  explanation="`random.choice(list)` returns one random element from that list."
+/>
+
+<MCQ
+  question="Which is NOT a benefit of functions?"
+  options={[
+    "They help us reuse code.",
+    "They make the program easier to read.",
+    "They guarantee the computer never crashes.",
+  ]}
+  correct={2}
+  explanation="Functions are great, but they can’t defeat all bugs by themselves."
+/>
+
+---
+
+## Stretch Goals (Pick any!)
+
+- Add a **dog**: make a circle head, two floppy ears (stretched triangles), and a dot nose.
+- Random **background**: pick a color each run with `screen.bgcolor(random.choice(colors))`.
+- Make keys for each pet: <Badge>1</Badge> cat, <Badge>2</Badge> fish, <Badge>3</Badge> turtle.
+- Animate: after drawing, spin the turtle with a tiny loop.
+
+<Callout type="note">
+Real artists ship. Your first version doesn’t need to be fancy; it just needs to be yours.
+</Callout>
+
+## Exit Ticket
+
+Answer in one line each:
+1) What’s the difference between a **loop** and an **event**?  
+2) Why are **functions** useful in your own words?  
+3) What’s your favorite color from the palette and why?
+
+---
+
+<Tiny>
+Made with kindness, caffeine-free turtles, and curiosity. Keep tinkering — you’re building computational superpowers.
+</Tiny>
