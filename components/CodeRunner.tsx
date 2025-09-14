@@ -63,10 +63,10 @@ export default function CodeRunner({ starter='' }:{ starter?: string }) {
   }
 
   return (
-    <div className="card space-y-3">
-      <div className="flex items-center justify-between">
+    <div className="card space-y-3 w-full max-w-full">
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <h3 className="text-xl font-extrabold">Python Playground</h3>
-        <button onClick={run} disabled={busy} className="px-4 py-2 rounded-xl bg-pink-600 text-white font-bold disabled:opacity-50 hover:bg-pink-700 transition-colors">
+        <button onClick={run} disabled={busy} className="px-4 py-2 rounded-xl bg-pink-600 text-white font-bold disabled:opacity-50 hover:bg-pink-700 transition-colors text-sm sm:text-base">
           {busy ? (ready ? 'Running Python... 🐍' : 'Loading Python... ⏳') : (ready ? 'Run Code ▶️' : 'Load & Run ▶️')}
         </button>
       </div>
@@ -74,9 +74,9 @@ export default function CodeRunner({ starter='' }:{ starter?: string }) {
         ref={editorRef}
         defaultValue={starter}
         spellCheck={false}
-        className="w-full h-48 font-mono text-sm p-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-pink-400"
+        className="w-full h-48 font-mono text-sm p-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none overflow-auto"
       />
-      <pre className="bg-black text-white rounded-xl p-4 overflow-auto min-h-32 max-h-64"><code className="whitespace-pre-wrap">{out}</code></pre>
+      <pre className="bg-black text-white rounded-xl p-4 overflow-x-auto overflow-y-auto min-h-32 max-h-64 w-full"><code className="whitespace-pre-wrap text-sm break-words">{out}</code></pre>
     </div>
   )
 }

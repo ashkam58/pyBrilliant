@@ -82,34 +82,34 @@ export default function RootLayout({
         <meta name="color-scheme" content="light" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
-      <body className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 font-comic antialiased">
-        <div className="flex flex-col min-h-screen">
+      <body className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 font-comic antialiased overflow-x-hidden">
+        <div className="flex flex-col min-h-screen max-w-full">
           <Header />
-          <main className="flex-1 relative">
-            {/* Floating cartoon elements */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-              <div className="absolute top-10 left-10 text-6xl animate-bounce delay-1000">🐍</div>
-              <div className="absolute top-32 right-20 text-4xl animate-pulse delay-2000">💻</div>
-              <div className="absolute bottom-40 left-32 text-5xl animate-bounce delay-3000">⚡</div>
-              <div className="absolute top-64 left-1/2 text-3xl animate-spin delay-4000">🚀</div>
-              <div className="absolute bottom-32 right-40 text-4xl animate-pulse delay-5000">✨</div>
-              <div className="absolute top-48 right-1/3 text-3xl animate-bounce delay-6000">🎯</div>
-              <div className="absolute bottom-64 left-1/4 text-4xl animate-pulse delay-1000">🧠</div>
+          <main className="flex-1 relative w-full">
+            {/* Floating cartoon elements - hidden on mobile for better performance */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 hidden sm:block">
+              <div className="absolute top-10 left-10 text-3xl sm:text-6xl animate-bounce delay-1000">🐍</div>
+              <div className="absolute top-32 right-20 text-2xl sm:text-4xl animate-pulse delay-2000">💻</div>
+              <div className="absolute bottom-40 left-32 text-3xl sm:text-5xl animate-bounce delay-3000">⚡</div>
+              <div className="absolute top-64 left-1/2 text-xl sm:text-3xl animate-spin delay-4000">🚀</div>
+              <div className="absolute bottom-32 right-40 text-2xl sm:text-4xl animate-pulse delay-5000">✨</div>
+              <div className="absolute top-48 right-1/3 text-xl sm:text-3xl animate-bounce delay-6000">🎯</div>
+              <div className="absolute bottom-64 left-1/4 text-2xl sm:text-4xl animate-pulse delay-1000">🧠</div>
             </div>
             
-            <div className="relative z-10">
+            <div className="relative z-10 w-full max-w-full overflow-x-hidden">
               {children}
             </div>
           </main>
           <Footer />
         </div>
         
-        {/* Background particles */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute w-2 h-2 bg-blue-300 rounded-full animate-ping" style={{top: '20%', left: '10%', animationDelay: '0s'}}></div>
+        {/* Background particles - reduced on mobile */}
+        <div className="fixed inset-0 pointer-events-none z-0 hidden sm:block">
+          <div className="absolute w-1 sm:w-2 h-1 sm:h-2 bg-blue-300 rounded-full animate-ping" style={{top: '20%', left: '10%', animationDelay: '0s'}}></div>
           <div className="absolute w-1 h-1 bg-purple-300 rounded-full animate-ping" style={{top: '40%', right: '15%', animationDelay: '1s'}}></div>
-          <div className="absolute w-3 h-3 bg-green-300 rounded-full animate-ping" style={{bottom: '30%', left: '20%', animationDelay: '2s'}}></div>
-          <div className="absolute w-2 h-2 bg-yellow-300 rounded-full animate-ping" style={{top: '60%', right: '25%', animationDelay: '3s'}}></div>
+          <div className="absolute w-2 sm:w-3 h-2 sm:h-3 bg-green-300 rounded-full animate-ping" style={{bottom: '30%', left: '20%', animationDelay: '2s'}}></div>
+          <div className="absolute w-1 sm:w-2 h-1 sm:h-2 bg-yellow-300 rounded-full animate-ping" style={{top: '60%', right: '25%', animationDelay: '3s'}}></div>
           <div className="absolute w-1 h-1 bg-pink-300 rounded-full animate-ping" style={{bottom: '20%', right: '10%', animationDelay: '4s'}}></div>
         </div>
       </body>

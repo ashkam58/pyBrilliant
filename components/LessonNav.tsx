@@ -12,11 +12,11 @@ export default function LessonNav() {
   const courseInfo = { title: 'Python Course', emoji: '🐍', color: 'blue' }
   
   return (
-    <nav className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/50 p-6 sticky top-24 overflow-y-auto max-h-screen">
-      <div className="flex items-center space-x-2 mb-6">
-        <div className="text-2xl">{courseInfo.emoji}</div>
+    <nav className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/50 p-4 lg:p-6 lg:sticky lg:top-24 overflow-y-auto max-h-screen w-full">
+      <div className="flex items-center space-x-2 mb-4 lg:mb-6">
+        <div className="text-xl lg:text-2xl">{courseInfo.emoji}</div>
         <div>
-          <h3 className="text-lg font-bold text-gray-800">{courseInfo.title}</h3>
+          <h3 className="text-base lg:text-lg font-bold text-gray-800">{courseInfo.title}</h3>
           <p className="text-xs text-gray-500">Interactive Learning Path</p>
         </div>
       </div>
@@ -50,8 +50,8 @@ export default function LessonNav() {
                     {index + 1}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium truncate">{ch.title}</div>
-                    <div className="text-xs opacity-70 text-gray-500">{ch.tagline} • {ch.estMins}m</div>
+                    <div className="text-xs sm:text-sm font-medium truncate">{ch.title}</div>
+                    <div className="text-xs opacity-70 text-gray-500 truncate">{ch.tagline} • {ch.estMins}m</div>
                   </div>
                   {active && (
                     <div className={colorClasses.activeIcon}>
