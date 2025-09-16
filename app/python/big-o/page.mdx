@@ -1,10 +1,117 @@
-import CartoonCard from "@/components/dsa/CartoonCard";
-import OperationCounter from "@/components/dsa/OperationCounter";
-import BinarySearchViz from "@/components/dsa/BinarySearchViz";
-import ReindexingSimulator from "@/components/dsa/ReindexingSimulator";
-import DropTheNoise from "@/components/dsa/DropTheNoise";
-import TwoInputComplexity from "@/components/dsa/TwoInputComplexity";
-import SortingOverview from "@/components/dsa/SortingOverview";
+import BigOPlayground from '@/components/BigOPlayground'
+import Callout from '@/components/Callout'
+import CartoonCard from '@/components/dsa/CartoonCard'
+import OperationCounter from '@/components/dsa/OperationCounter'
+import BinarySearchViz from '@/components/dsa/BinarySearchViz'
+import ReindexingSimulator from '@/components/dsa/ReindexingSimulator'
+import DropTheNoise from '@/components/dsa/DropTheNoise'
+import TwoInputComplexity from '@/components/dsa/TwoInputComplexity'
+import SortingOverview from '@/components/dsa/SortingOverview'
+import StopwatchSim from '@/components/dsa/StopwatchSim'
+import BigOBarPlot from '@/components/dsa/BigOBarPlot'
+import SearchSimulator from '@/components/dsa/SearchSimulator'
+import QuizMCQ from '@/components/ui/QuizMCQ'
+
+---
+title: Big O (Growth of Functions)
+---
+
+# Big O — Growth of Functions
+
+Welcome! This lesson introduces Big O notation and gives you an interactive playground to explore how different complexity classes grow as the input size n increases.
+
+<Callout>
+This page includes an interactive playground. Use the slider to change n and toggle different complexity classes to see how they compare.
+</Callout>
+
+## Visual Playground
+
+<BigOPlayground />
+
+## Quick Theory
+
+Big O notation describes the asymptotic upper bound of how a function grows relative to its input size. Common complexity classes:
+
+- O(1): Constant time — does not grow with n.
+- O(log n): Logarithmic — grows very slowly.
+- O(n): Linear — grows proportionally to n.
+- O(n log n): Linearithmic — common in efficient sorting algorithms.
+- O(n^2): Quadratic — nested loops over n.
+- O(2^n): Exponential — doubles with each additional input element.
+
+## Examples (spot the Big O)
+
+1. Loop from 0 to n-1 and do O(1) work each iteration.
+
+2. Two nested loops from 0 to n-1 doing O(1) work — O(n^2).
+
+3. Binary search on a sorted array — O(log n).
+
+## Exercises
+
+### Easy
+
+What is the Big O of the following code?
+
+```js
+function sum(arr) {
+  let total = 0
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i]
+  }
+  return total
+}
+```
+
+<details>
+<summary>Answer</summary>
+
+O(n)
+
+</details>
+
+### Medium
+
+What is the Big O here?
+
+```js
+function pairs(arr) {
+  const out = []
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      out.push([arr[i], arr[j]])
+    }
+  }
+  return out
+}
+```
+
+<details>
+<summary>Answer</summary>
+
+O(n^2)
+
+</details>
+
+### Hard
+
+What is the complexity of generating all subsets of a set of size n (the power set)?
+
+<details>
+<summary>Answer</summary>
+
+O(2^n)
+
+</details>
+
+## Try it out
+
+Use the interactive playground above to compare classes across ranges. Tip: switch to logarithmic scale for wide ranges to make exponential growth visible.
+
+---
+
+
+Happy teaching! If you'd like, I can also add a `big-o-code` interactive page with a CodeRunner that lets students write small functions and measure approximate operation counts.
 
 <StopwatchSim />
 

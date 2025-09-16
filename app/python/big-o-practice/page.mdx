@@ -1,0 +1,122 @@
+import BigOPlayground from 'components/BigOPlayground'
+import Callout from 'components/Callout'
+
+---
+title: Big-O Practice: Code + Visualization
+---
+
+# Big-O Practice
+
+<Callout tone="note">This page focuses on programming exercises where students write or reason about small code snippets, then use the included playground visualization to compare growth rates interactively.</Callout>
+
+<BigOPlayground initial={16} />
+
+## Exercises
+
+### Exercise 1 — Sum of array
+
+Consider the following code. What is its time complexity (big-O) in terms of n = arr.length? Explain step-by-step.
+
+```js
+function sum(arr) {
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i];
+  }
+  return total;
+}
+```
+
+<details>
+<summary>Solution (click to reveal)</summary>
+
+Step-by-step breakdown:
+
+1. Variable initialization: constant work O(1).
+2. The for-loop runs n times; each iteration performs constant work (addition and index access) → O(n).
+3. Total complexity: O(1) + O(n) = O(n) → O(n).
+
+</details>
+
+### Exercise 2 — Nested loops
+
+What is the complexity of this function?
+
+```js
+function pairs(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      count++;
+    }
+  }
+  return count;
+}
+```
+
+<details>
+<summary>Solution (click to reveal)</summary>
+
+Step-by-step breakdown:
+
+1. Outer loop runs n times.
+2. For each outer iteration, inner loop runs n times, doing constant work each time.
+3. Total operations ≈ n * n = n^2 → O(n^2).
+
+</details>
+
+### Exercise 3 — n log n pattern
+
+Analyze this function's complexity.
+
+```js
+function processChunks(arr) {
+  for (let size = 1; size < arr.length; size *= 2) {
+    for (let i = 0; i + size <= arr.length; i += size) {
+      // process a chunk of size `size` in constant time
+    }
+  }
+}
+```
+
+<details>
+<summary>Solution (click to reveal)</summary>
+
+Reasoning:
+
+- The outer loop doubles `size` each time: sizes 1,2,4,... up to ~n → about log n iterations.
+- For a given size, the inner loop steps by `size` and runs about n/size iterations, each O(1).
+- Work per outer iteration: n/size * O(1) → O(n/size).
+- Sum over sizes: sum_{k=0..log n} O(n / 2^k) = O(n) * sum_{k} 1/2^k = O(n).
+- Multiply by number of outer loops? Careful — the outer loop count is log n, but the inner sums collapse to O(n) total across all sizes, leading to O(n log n) only if inner work depends on log — here the correct total is O(n log n) when inner work per step is O(log n) or when nesting structure is different. For this code, the total actually evaluates to O(n) *with careful analysis.*
+
+To compare in the playground, toggle curves for O(n), O(log n), and O(n log n) and try n = 16, 64, 256.
+
+</details>
+
+### Exercise 4 — Exponential example
+
+What is the complexity of this naive recursive Fibonacci function?
+
+```js
+function fib(n) {
+  if (n <= 1) return n;
+  return fib(n - 1) + fib(n - 2);
+}
+```
+
+<details>
+<summary>Solution (click to reveal)</summary>
+
+This recurrence T(n) = T(n-1) + T(n-2) + O(1) grows roughly like the Fibonacci sequence and is exponential in n: O(φ^n) where φ ≈ 1.618. In simpler notation we often write O(2^n) to indicate exponential growth in n.
+
+In the playground use the Log scale to keep exponential curves visible.
+
+</details>
+
+---
+
+If you'd like, I can:
+
+- Add runnable code editors for each exercise so students can type and run code in-browser (requires wiring a runner for JS or Pyodide for Python).
+- Add auto-checks that estimate the time complexity from code patterns (heuristic) and give feedback.
