@@ -1,5 +1,5 @@
-import BigOPlayground from 'components/BigOPlayground'
-import Callout from 'components/Callout'
+import BigOPlayground from '@/components/BigOPlayground'
+import Callout from '@/components/Callout'
 
 ---
 title: Big-O Practice: Code + Visualization
@@ -42,15 +42,7 @@ Step-by-step breakdown:
 
 What is the complexity of this function?
 
-```js
-function pairs(arr) {
-  let count = 0;
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
       count++;
-    }
-  }
-  return count;
 }
 ```
 
@@ -84,11 +76,8 @@ function processChunks(arr) {
 
 Reasoning:
 
-- The outer loop doubles `size` each time: sizes 1,2,4,... up to ~n → about log n iterations.
-- For a given size, the inner loop steps by `size` and runs about n/size iterations, each O(1).
-- Work per outer iteration: n/size * O(1) → O(n/size).
-- Sum over sizes: sum_{k=0..log n} O(n / 2^k) = O(n) * sum_{k} 1/2^k = O(n).
-- Multiply by number of outer loops? Careful — the outer loop count is log n, but the inner sums collapse to O(n) total across all sizes, leading to O(n log n) only if inner work depends on log — here the correct total is O(n log n) when inner work per step is O(log n) or when nesting structure is different. For this code, the total actually evaluates to O(n) *with careful analysis.*
+
+- Multiply by number of outer loops? Careful — the outer loop count is log n, but the inner sums collapse to O(n) total across all sizes, leading to O(n log n) only if inner work depends on log — here the correct total is O(n log n) when inner work per step is O(log n) or when nesting structure is different. For this code, the total actually evaluates to O(n) `with careful analysis`.
 
 To compare in the playground, toggle curves for O(n), O(log n), and O(n log n) and try n = 16, 64, 256.
 
