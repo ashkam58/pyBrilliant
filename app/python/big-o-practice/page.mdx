@@ -15,17 +15,24 @@ title: Big-O Practice: Code + Visualization
 
 ### Exercise 1 — Sum of array
 
-Consider the following code. What is its time complexity (big-O) in terms of n = arr.length? Explain step-by-step.
 
-```js
-function sum(arr) {
-  let total = 0;
-  for (let i = 0; i < arr.length; i++) {
-    total += arr[i];
-  }
-  return total;
-}
-```
+Try it yourself:
+
+<CodeRunner
+  language="js"
+  starter={`function sum(arr) {\n  let total = 0;\n  for (let i = 0; i < arr.length; i++) {\n    total += arr[i];\n  }\n  return total;\n}\n\nsum([1,2,3,4,5]); // Try changing the array!`}
+  showOutput
+/>
+
+What is the time complexity of this code?
+
+<Quiz
+  question="What is the Big-O time complexity of the sum function above?"
+  options={["O(1)", "O(n)", "O(n^2)", "O(log n)"]}
+  answer={1}
+  correctText="🎉 Correct! Summing an array is O(n) because you visit every element once."
+  incorrectText="Try again! Hint: How many times does the loop run?"
+/>
 
 <details>
 <summary>Solution (click to reveal)</summary>
@@ -40,11 +47,24 @@ Step-by-step breakdown:
 
 ### Exercise 2 — Nested loops
 
-What is the complexity of this function?
 
-      count++;
-}
-```
+Try it yourself:
+
+<CodeRunner
+  language="js"
+  starter={`function pairs(arr) {\n  let count = 0;\n  for (let i = 0; i < arr.length; i++) {\n    for (let j = 0; j < arr.length; j++) {\n      count++;\n    }\n  }\n  return count;\n}\n\npairs([1,2,3,4]); // Try changing the array!`}
+  showOutput
+/>
+
+What is the time complexity of this code?
+
+<Quiz
+  question="What is the Big-O time complexity of the pairs function above?"
+  options={["O(1)", "O(n)", "O(n^2)", "O(log n)"]}
+  answer={2}
+  correctText="🎉 Correct! Nested loops over n elements give O(n^2)."
+  incorrectText="Try again! Hint: How many times does the inner loop run for each outer loop?"
+/>
 
 <details>
 <summary>Solution (click to reveal)</summary>
@@ -59,17 +79,24 @@ Step-by-step breakdown:
 
 ### Exercise 3 — n log n pattern
 
-Analyze this function's complexity.
 
-```js
-function processChunks(arr) {
-  for (let size = 1; size < arr.length; size *= 2) {
-    for (let i = 0; i + size <= arr.length; i += size) {
-      // process a chunk of size `size` in constant time
-    }
-  }
-}
-```
+Try it yourself:
+
+<CodeRunner
+  language="js"
+  starter={`function processChunks(arr) {\n  for (let size = 1; size < arr.length; size *= 2) {\n    for (let i = 0; i + size <= arr.length; i += size) {\n      // process a chunk of size 'size' in constant time\n    }\n  }\n}\n\nprocessChunks([1,2,3,4,5,6,7,8]); // Try changing the array!`}
+  showOutput
+/>
+
+What is the time complexity of this code?
+
+<Quiz
+  question="What is the Big-O time complexity of the processChunks function above?"
+  options={["O(n)", "O(n log n)", "O(n^2)", "O(log n)"]}
+  answer={1}
+  correctText="🎉 Correct! Doubling size and nested loops give O(n log n)."
+  incorrectText="Try again! Hint: How many times does the outer loop run?"
+/>
 
 <details>
 <summary>Solution (click to reveal)</summary>
@@ -85,14 +112,24 @@ To compare in the playground, toggle curves for O(n), O(log n), and O(n log n) a
 
 ### Exercise 4 — Exponential example
 
-What is the complexity of this naive recursive Fibonacci function?
 
-```js
-function fib(n) {
-  if (n <= 1) return n;
-  return fib(n - 1) + fib(n - 2);
-}
-```
+Try it yourself:
+
+<CodeRunner
+  language="js"
+  starter={`function fib(n) {\n  if (n <= 1) return n;\n  return fib(n - 1) + fib(n - 2);\n}\n\nfib(5); // Try changing n!`}
+  showOutput
+/>
+
+What is the time complexity of this code?
+
+<Quiz
+  question="What is the Big-O time complexity of the fib function above?"
+  options={["O(n)", "O(n^2)", "O(2^n)", "O(log n)"]}
+  answer={2}
+  correctText="🎉 Correct! Naive recursion for Fibonacci is exponential: O(2^n)."
+  incorrectText="Try again! Hint: How many recursive calls are made for each n?"
+/>
 
 <details>
 <summary>Solution (click to reveal)</summary>
@@ -108,4 +145,6 @@ In the playground use the Log scale to keep exponential curves visible.
 If you'd like, I can:
 
 - Add runnable code editors for each exercise so students can type and run code in-browser (requires wiring a runner for JS or Pyodide for Python).
+- Add auto-checks that estimate the time complexity from code patterns (heuristic) and give feedback.
+thon).
 - Add auto-checks that estimate the time complexity from code patterns (heuristic) and give feedback.

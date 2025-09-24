@@ -1,0 +1,383 @@
+import Callout from '@/components/Callout'
+
+---
+title: Cartoon Solar System with Python Turtle
+---
+
+# Cartoon Solar System Adventure
+
+<Callout tone="note">This playful mission introduces the Python <code>turtle</code> module while sneaking in friendly doses of geometry, loops, and animation. Each stop on the journey adds a new visual so learners always see what their code does.</Callout>
+
+## What you will build
+- A star-sprinkled night sky as the stage for our cartoon universe
+- A bright sun plus colorful planets and moons sized by simple math
+- Orbit paths drawn with loops so planets travel in smooth circles
+- An optional animation loop that makes everything revolve in real time
+
+## Mission prep: tools and theory
+
+### 1. Install and test turtle
+Python includes <code>turtle</code> by default on Windows and macOS. Open a terminal and run:
+
+```bash
+python --version
+python - <<'PY'
+import turtle
+print('turtle ready for launch!')
+PY
+```
+
+If a window pops up (even briefly), the module is ready.
+
+### 2. Quick theory pit stop
+- The turtle canvas is a 2D coordinate plane with <code>(0, 0)</code> in the center.
+- Angles turn counter-clockwise; one lap is 360 degrees.
+- Circles are drawn by asking the turtle to walk and turn a tiny bit repeatedly.
+- Orbit speed feels right when distance traveled each frame stays proportional to the orbit radius (think circumference: <code>2 * pi * r</code>).
+
+## Step 1: Launch the space stage
+
+screen = t.Screen()
+screen.setup(width=800, height=800)
+screen.bgcolor("midnight blue")
+screen.title("Cartoon Solar System")
+screen.update()
+
+**Concepts:** screen setup, RGB colors, drawing simple stars with loops.
+
+Try it yourself:
+
+<CodeRunner
+    language="python"
+    starter={`import turtle as t\nimport random\n\nscreen = t.Screen()\nscreen.setup(width=800, height=800)\nscreen.bgcolor('midnight blue')\nscreen.title('Cartoon Solar System')\n\npen = t.Turtle()\npen.hideturtle()\npen.speed(0)\n\n# sprinkle cartoon stars\npen.color('white')\nfor _ in range(40):\n    pen.up()\n    x = random.randint(-380, 380)\n    y = random.randint(-360, 360)\n    pen.goto(x, y)\n    pen.down()\n    pen.begin_fill()\n    for _ in range(5):\n        pen.forward(10)\n        pen.right(144)\n    pen.end_fill()\n\nscreen.update()`}
+    showOutput
+/>
+
+What does the turtle module do in Python?
+
+<Quiz
+    question="What is the main purpose of the turtle module in Python?"
+    options={["Draw graphics and shapes", "Send network requests", "Play music", "Sort arrays"]}
+    answer={0}
+    correctText="🦄 Correct! Turtle is for drawing and visualizing graphics."
+    incorrectText="Try again! Hint: Think about what you see on the screen."
+/>
+
+Visualization checklist: a navy window with white cartoon stars. If stars are static, you are ready for planets.
+
+## Step 2: Draw a glowing sun
+
+sun.hideturtle()
+sun.speed(0)
+
+sun.up()
+sun.goto(0, -80)  # start below center so the circle sits in the middle
+sun.down()
+sun.color("gold", "goldenrod")
+sun.begin_fill()
+sun.circle(80)
+sun.end_fill()
+
+# add a soft glow ring
+sun.up()
+sun.color("orange")
+sun.goto(0, -110)
+sun.down()
+sun.pensize(4)
+sun.circle(110)
+
+screen.update()
+
+**Concepts:** fill colors, drawing filled circles, layering shapes.
+
+Try it yourself:
+
+<CodeRunner
+    language="python"
+    starter={`import turtle as t\nscreen = t.Screen()\nscreen.setup(width=800, height=800)\nscreen.bgcolor('midnight blue')\nsun = t.Turtle()\nsun.hideturtle()\nsun.speed(0)\nsun.up()\nsun.goto(0, -80)\nsun.down()\nsun.color('gold', 'goldenrod')\nsun.begin_fill()\nsun.circle(80)\nsun.end_fill()\nsun.up()\nsun.color('orange')\nsun.goto(0, -110)\nsun.down()\nsun.pensize(4)\nsun.circle(110)\nscreen.update()`}
+    showOutput
+/>
+
+What does sun.begin_fill() do?
+
+<Quiz
+    question="What does sun.begin_fill() do in turtle graphics?"
+    options={["Starts filling the shape with color", "Moves the turtle to the center", "Draws a circle", "Changes the pen color"]}
+    answer={0}
+    correctText="🌞 Correct! begin_fill() starts filling the next shape drawn."
+    incorrectText="Try again! Hint: What happens to the sun's color?"
+/>
+
+Visualization checklist: a warm sun with an outline sitting at the center of the sky.
+
+## Step 3: Craft cartoon planets with helper functions
+
+def draw_orbit(radius, color="white"):
+    pen.up()
+    pen.goto(0, -radius)
+    pen.down()
+    pen.color(color)
+    pen.pensize(1)
+    pen.circle(radius)
+
+planet_specs = [
+    (140, 15, "light sky blue", "Orbit of Aqua"),
+    (200, 20, "pale violet red", "Orbit of Berry"),
+    (270, 30, "medium sea green", "Orbit of Lime"),
+]
+
+for radius, size, color, label in planet_specs:
+    draw_orbit(radius, "gray25")
+
+    planet = t.Turtle()
+    planet.hideturtle()
+    planet.speed(0)
+    planet.up()
+    planet.goto(0, -radius)
+    planet.color(color)
+    planet.down()
+    planet.begin_fill()
+    planet.circle(size)
+    planet.end_fill()
+
+    pen.up()
+    pen.goto(0, -radius - size - 10)
+    pen.color("white")
+    pen.write(label, align="center", font=("Arial", 10, "bold"))
+
+screen.update()
+
+**Concepts:** functions for reuse, positioning with polar coordinates, orbit guides.
+
+Try it yourself:
+
+<CodeRunner
+  language="python"
+  starter={`import turtle as t\nimport math\nscreen = t.Screen()\nscreen.setup(width=800, height=800)\nscreen.bgcolor('midnight blue')\npen = t.Turtle()\npen.hideturtle()\npen.speed(0)\ndef draw_orbit(radius, color='white'):\n    pen.up()\n    pen.goto(0, -radius)\n    pen.down()\n    pen.color(color)\n    pen.pensize(1)\n    pen.circle(radius)\nplanet_specs = [(140, 15, 'light sky blue', 'Orbit of Aqua'), (200, 20, 'pale violet red', 'Orbit of Berry'), (270, 30, 'medium sea green', 'Orbit of Lime')]\nfor radius, size, color, label in planet_specs:\n    draw_orbit(radius, 'gray25')\n    planet = t.Turtle()\n    planet.hideturtle()\n    planet.speed(0)\n    planet.up()\n    planet.goto(0, -radius)\n    planet.color(color)\n    planet.down()\n    planet.begin_fill()\n    planet.circle(size)\n    planet.end_fill()\n    pen.up()\n    pen.goto(0, -radius - size - 10)\n    pen.color('white')\n    pen.write(label, align='center', font=('Arial', 10, 'bold'))\nscreen.update()`}
+  showOutput
+/>
+
+What does draw_orbit(radius) do?
+
+<Quiz
+  question="What does the draw_orbit function do?"
+  options={["Draws a circular orbit guide", "Moves the turtle to the sun", "Fills the planet with color", "Animates the planet"]}
+  answer={0}
+  correctText="🪐 Correct! It draws a circular orbit for each planet."
+  incorrectText="Try again! Hint: What shape appears on the screen?"
+/>
+
+Visualization checklist: thin orbit rings with three colorful planets tucked on the bottom of each circle.
+
+## Step 4: Give each planet motion
+
+
+**Concepts:** animation loop, angle math, separate turtles for each planet.
+
+Try it yourself:
+
+<CodeRunner
+  language="python"
+  starter={`import turtle as t\nimport math\nscreen = t.Screen()\nscreen.setup(width=800, height=800)\nscreen.bgcolor('midnight blue')\nscreen.tracer(0)\nclass Planet:\n    def __init__(self, radius, size, color, speed):\n        self.radius = radius\n        self.angle = 0\n        self.speed = speed\n        turtle = t.Turtle()\n        turtle.hideturtle()\n        turtle.speed(0)\n        turtle.shape('circle')\n        turtle.color(color)\n        turtle.shapesize(size / 10)\n        turtle.up()\n        self.turtle = turtle\n    def move(self):\n        self.angle = (self.angle + self.speed) % 360\n        radians = math.radians(self.angle)\n        x = self.radius * math.cos(radians)\n        y = self.radius * math.sin(radians)\n        self.turtle.goto(x, y)\nplanets = [\n    Planet(140, 15, 'light sky blue', 2.5),\n    Planet(200, 20, 'pale violet red', 1.8),\n    Planet(270, 30, 'medium sea green', 1.2),\n]\nwhile True:\n    for planet in planets:\n        planet.move()\n    screen.update()`}
+  showOutput
+/>
+
+What does the move method do for each planet?
+
+<Quiz
+  question="What does the move method do for each planet?"
+  options={["Updates the planet's position in orbit", "Changes the planet's color", "Draws a new planet", "Stops the animation"]}
+  answer={0}
+  correctText="🚀 Correct! It moves the planet along its orbit."
+  incorrectText="Try again! Hint: What changes on the screen each frame?"
+/>
+
+Visualization checklist: planets glide around the sun at different speeds. Close the window to stop the loop.
+
+<Callout tone="tip">Adjust the <code>speed</code> values to experiment with slower or faster orbits. Speeds proportional to <code>1 / sqrt(radius)</code> feel more realistic, while equal speeds look more cartoonish.</Callout>
+
+## Step 5: Bonus moon and comet
+
+
+**Concepts:** nested orbits, combining sine and cosine, extending classes.
+
+Try it yourself:
+
+<CodeRunner
+    language="python"
+    starter={`import turtle as t\nimport math\nscreen = t.Screen()\nscreen.setup(width=800, height=800)\nscreen.bgcolor('midnight blue')\nscreen.tracer(0)\nclass Planet:\n    def __init__(self, radius, size, color, speed):\n        self.radius = radius\n        self.angle = 0\n        self.speed = speed\n        turtle = t.Turtle()\n        turtle.hideturtle()\n        turtle.speed(0)\n        turtle.shape('circle')\n        turtle.color(color)\n        turtle.shapesize(size / 10)\n        turtle.up()\n        self.turtle = turtle\n    def move(self):\n        self.angle = (self.angle + self.speed) % 360\n        radians = math.radians(self.angle)\n        x = self.radius * math.cos(radians)\n        y = self.radius * math.sin(radians)\n        self.turtle.goto(x, y)\nclass Moon(Planet):\n    def __init__(self, host, radius, size, color, speed):\n        super().__init__(radius, size, color, speed)\n        self.host = host\n    def move(self):\n        self.angle = (self.angle + self.speed) % 360\n        radians = math.radians(self.angle)\n        host_x, host_y = self.host.turtle.position()\n        x = host_x + self.radius * math.cos(radians)\n        y = host_y + self.radius * math.sin(radians)\n        self.turtle.goto(x, y)\nplanets = [\n    Planet(140, 15, 'light sky blue', 2.5),\n    Planet(200, 20, 'pale violet red', 1.8),\n    Planet(270, 30, 'medium sea green', 1.2),\n]\nmoon = Moon(host=planets[2], radius=40, size=8, color='light gray', speed=4)\nplanets.append(moon)\nwhile True:\n    for planet in planets:\n        planet.move()\n    moon.move()\n    screen.update()`}
+    showOutput
+/>
+
+What does the Moon class add to the simulation?
+
+<Quiz
+    question="What does the Moon class add to the simulation?"
+    options={["A moon that orbits a planet", "A comet that flies across the screen", "A new planet", "A sun with a glow"]}
+    answer={0}
+    correctText="🌙 Correct! The Moon class lets you add moons that orbit planets."
+    incorrectText="Try again! Hint: What new object appears and moves differently?"
+/>
+
+Add a comet with a stretched turtle shape:
+
+```python
+comet = t.Turtle(shape="triangle")
+comet.color("orange red")
+comet.shapesize(stretch_wid=0.5, stretch_len=2.5)
+comet.up()
+angle = 0
+
+while True:
+    for planet in planets:
+        planet.move()
+    comet.setheading(angle)
+    comet.goto(-360 + angle * 2, 240 - angle * 0.8)
+    angle = (angle + 1) % 360
+    screen.update()
+```
+
+Visualization checklist: a tiny moon orbiting the outer planet and a comet sweeping diagonally.
+
+## Full mission code
+
+Put everything together in one file named <code>cartoon_solar_system.py</code> so learners can run it end to end.
+
+```python
+import math
+import random
+import turtle as t
+
+screen = t.Screen()
+screen.setup(width=800, height=800)
+screen.bgcolor("midnight blue")
+screen.title("Cartoon Solar System")
+
+pen = t.Turtle()
+pen.hideturtle()
+pen.speed(0)
+
+# stars
+def draw_star(x, y):
+    pen.up()
+    pen.goto(x, y)
+    pen.down()
+    pen.begin_fill()
+    for _ in range(5):
+        pen.forward(10)
+        pen.right(144)
+    pen.end_fill()
+
+pen.color("white")
+for _ in range(40):
+    draw_star(random.randint(-380, 380), random.randint(-360, 360))
+
+# sun
+sun = t.Turtle()
+sun.hideturtle()
+sun.speed(0)
+sun.up()
+sun.goto(0, -80)
+sun.down()
+sun.color("gold", "goldenrod")
+sun.begin_fill()
+sun.circle(80)
+sun.end_fill()
+sun.up()
+sun.color("orange")
+sun.goto(0, -110)
+sun.down()
+sun.pensize(4)
+sun.circle(110)
+
+# orbit guide
+pen.pensize(1)
+pen.color("gray25")
+
+planet_specs = [
+    (140, 15, "light sky blue", 2.5, "Orbit of Aqua"),
+    (200, 20, "pale violet red", 1.8, "Orbit of Berry"),
+    (270, 30, "medium sea green", 1.2, "Orbit of Lime"),
+]
+
+for radius, _, _, _, label in planet_specs:
+    pen.up()
+    pen.goto(0, -radius)
+    pen.down()
+    pen.circle(radius)
+    pen.up()
+    pen.goto(0, -radius - 40)
+    pen.color("white")
+    pen.write(label, align="center", font=("Arial", 10, "bold"))
+    pen.color("gray25")
+
+screen.tracer(0)
+
+class Planet:
+    def __init__(self, radius, size, color, speed):
+        self.radius = radius
+        self.angle = random.randint(0, 359)
+        self.speed = speed
+        turtle = t.Turtle()
+        turtle.hideturtle()
+        turtle.speed(0)
+        turtle.shape("circle")
+        turtle.color(color)
+        turtle.shapesize(size / 10)
+        turtle.up()
+        self.turtle = turtle
+
+    def move(self):
+        self.angle = (self.angle + self.speed) % 360
+        radians = math.radians(self.angle)
+        x = self.radius * math.cos(radians)
+        y = self.radius * math.sin(radians)
+        self.turtle.goto(x, y)
+
+planets = [
+    Planet(radius, size, color, speed)
+    for radius, size, color, speed, _ in planet_specs
+]
+
+class Moon(Planet):
+    def __init__(self, host, radius, size, color, speed):
+        super().__init__(radius, size, color, speed)
+        self.host = host
+
+    def move(self):
+        self.angle = (self.angle + self.speed) % 360
+        radians = math.radians(self.angle)
+        host_x, host_y = self.host.turtle.position()
+        x = host_x + self.radius * math.cos(radians)
+        y = host_y + self.radius * math.sin(radians)
+        self.turtle.goto(x, y)
+
+moon = Moon(host=planets[-1], radius=40, size=8, color="light gray", speed=4)
+planets.append(moon)
+
+comet = t.Turtle(shape="triangle")
+comet.color("orange red")
+comet.shapesize(stretch_wid=0.5, stretch_len=2.5)
+comet.up()
+angle = 0
+
+while True:
+    for planet in planets:
+        planet.move()
+    comet.setheading(angle)
+    comet.goto(-360 + angle * 2, 240 - angle * 0.8)
+    angle = (angle + 1) % 360
+    screen.update()
+
+# keep window open if loop is ever exited
+screen.mainloop()
+```
+
+## Mission debrief
+- Encourage learners to tweak radii, colors, and speeds to tell their own space stories.
+- Extend the class with trails (<code>turtle.pensize</code> plus <code>pendown()</code>) to leave orbit streaks.
+- Challenge idea: add a control panel with keyboard bindings (<code>screen.onkey</code>) to pause the universe or toggle comet trails.
+
+With this tutorial students see each concept immediately. They install turtle, draw a scene, build reusable helpers, and animate everything into a cheerful solar system.
+thon).
+- Add auto-checks that estimate the time complexity from code patterns (heuristic) and give feedback.
